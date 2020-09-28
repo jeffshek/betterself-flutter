@@ -33,6 +33,7 @@ dependencies:
   nb_utils: 3.1.6+11
   intl: 0.16.1
   http: 0.12.2
+  flutter_form_builder: 3.13.6
 
   # testing random package for learning
   english_words: ^3.1.5

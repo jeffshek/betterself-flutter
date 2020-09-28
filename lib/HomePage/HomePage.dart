@@ -2,19 +2,17 @@ import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:flutter/material.dart';
 
 class HomePageScreen extends StatefulWidget {
-  HomePageScreen({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
   // This class is the configuration for the state. It holds the values (in this
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
+  final String title = "Home";
 
-  final String title;
+  HomePageScreen({Key key, title}) : super(key: key);
 
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
   @override
   _HomePageScreenState createState() => _HomePageScreenState();
 }
@@ -31,7 +29,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     //   // called again, and so nothing would appear to happen.
     //   _counter++;
     // });
-    Navigator.pushNamed(context, HomeRoute);
+    Navigator.pushNamed(context, LoginRoute);
   }
 
   @override
@@ -46,7 +44,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("widget.title"),
+        title: Text(widget.title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -69,10 +67,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Home Page',
+              widget.title,
             ),
             Text(
-              'Home Page',
+              widget.title,
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
