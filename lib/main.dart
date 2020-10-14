@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'HomePage/HomePage.dart';
+import 'Login/LoginFormScreen.dart';
 import 'Login/LoginScreen.dart';
 import 'constants/route_constants.dart';
 
@@ -11,6 +12,7 @@ const AppTitle = "BetterSelf";
 var routes = <String, WidgetBuilder>{
   HomeRoute: (context) => HomePageScreen(),
   LoginRoute: (context) => LoginScreen(),
+  LoginFormRoute: (context) => LoginFormScreen(),
 };
 
 var _app = MaterialApp(
@@ -22,7 +24,8 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    initialRoute: HomeRoute,
+    // initialRoute: LoginRoute,
+    initialRoute: LoginFormRoute,
     routes: routes);
 
 class BetterSelfApp extends StatelessWidget {
