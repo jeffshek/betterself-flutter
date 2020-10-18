@@ -3,7 +3,10 @@ import 'dart:convert';
 
 import 'package:betterself_flutter/api.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
-import 'package:betterself_flutter/components/TextComponents.dart';
+import 'package:betterself_flutter/components/PaddingDefaults.dart';
+import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
+import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -36,38 +39,14 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           },
           child: Column(
             children: <Widget>[
+              getSafeAreaDefault(context),
+              getRouteHeaderTextPadding("Login"),
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, top: 14),
+                // padding: const EdgeInsets.only(left: 25, right: 25, top: 14),
+                padding: getDefaultPaddingInsets(),
                 child: Column(
                   children: <Widget>[
-                    SafeArea(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 8),
-                        alignment: Alignment.centerLeft,
-                        width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 25, right: 25, top: 14),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          headerText("BetterSelf"),
-                          SizedBox(width: 4),
-                          Padding(
-                              padding: const EdgeInsets.only(bottom: 2),
-                              child: subheaderText("Login"))
-                        ],
-                      ),
-                    ),
+                    getDefaultPadding(),
                     Padding(
                       padding: EdgeInsets.all(25),
                       child: Column(
@@ -129,6 +108,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       print(loginResponse.toJson());
       var token = loginResponse.key;
       _saveAccessToken(token);
+
+      Navigator.pushNamed(
+        context,
+        SupplementListRoute,
+      );
     }
 
     return response;
@@ -138,13 +122,13 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     final prefs = await SharedPreferences.getInstance();
     final key = 'accessToken';
     prefs.setString(key, token);
-    print ('Saved Token');
+    print('Saved Token');
   }
 
   _getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'accessToken';
     var token = prefs.getString(key) ?? "";
-    print ("Saved Token is $token");
+    print("Saved Token is $token");
   }
 }
