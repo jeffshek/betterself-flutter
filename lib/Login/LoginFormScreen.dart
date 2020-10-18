@@ -8,6 +8,7 @@ import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginFormScreen extends StatefulWidget {
   @override
@@ -16,6 +17,12 @@ class LoginFormScreen extends StatefulWidget {
 
 class _LoginFormScreenState extends State<LoginFormScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+
+  @override
+  void initState() {
+    _getAccessToken();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +127,24 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (response.statusCode == 200) {
       var loginResponse = loginResponseFromJson(response.body);
       print(loginResponse.toJson());
+      var token = loginResponse.key;
+      _saveAccessToken(token);
     }
 
     return response;
+  }
+
+  _saveAccessToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'accessToken';
+    prefs.setString(key, token);
+    print ('Saved Token');
+  }
+
+  _getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'accessToken';
+    var token = prefs.getString(key) ?? "";
+    print ("Saved Token is $token");
   }
 }
