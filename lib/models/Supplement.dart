@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final supplements = supplementsFromJson(jsonString);
+//     final supplement = supplementFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Supplements> supplementsFromJson(String str) => List<Supplements>.from(json.decode(str).map((x) => Supplements.fromJson(x)));
+List<Supplement> supplementFromJson(String str) => List<Supplement>.from(json.decode(str).map((x) => Supplement.fromJson(x)));
 
-String supplementsToJson(List<Supplements> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String supplementToJson(List<Supplement> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Supplements {
-  Supplements({
+class Supplement {
+  Supplement({
     this.uuid,
     this.created,
     this.modified,
@@ -29,7 +29,7 @@ class Supplements {
   String displayName;
   dynamic isTakenWithFood;
 
-  factory Supplements.fromJson(Map<String, dynamic> json) => Supplements(
+  factory Supplement.fromJson(Map<String, dynamic> json) => Supplement(
     uuid: json["uuid"],
     created: DateTime.parse(json["created"]),
     modified: DateTime.parse(json["modified"]),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:betterself_flutter/api/api.dart';
+import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,9 +28,14 @@ postLogin(String username, String password) async {
 getSupplements() async {
   final token = await getAccessToken();
   final supplementURL = getResourceEndpoint("supplements");
+  final headers = getAuthorizedHeaders(token);
 
-  print("Supplements | Saved Token is $token");
+  final http.Response response = await http.get(
+    supplementURL,
+    headers: headers,
+  );
 
-  // final supplements = supplementsFromJson(jsonString);
+  final supplements = supplementFromJson(response.body);
+  return supplements;
 
 }

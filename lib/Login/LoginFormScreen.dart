@@ -94,20 +94,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   }
 
   Future<http.Response> login(String username, String password) async {
-    // final http.Response response = await http.post(
-    //   loginEndpoint,
-    //   headers: unAuthenticatedAPIHeaders,
-    //   body: jsonEncode(<String, String>{
-    //     'username': username,
-    //     'password': password,
-    //   }),
-    // );
-
     final http.Response response = await postLogin(username, password);
 
     if (response.statusCode == 200) {
       var loginResponse = loginResponseFromJson(response.body);
-      print(loginResponse.toJson());
       var token = loginResponse.key;
       _saveAccessToken(token);
 
