@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:betterself_flutter/api.dart';
+import 'package:betterself_flutter/api/api.dart';
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
@@ -40,9 +41,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
           child: Column(
             children: <Widget>[
               getSafeAreaDefault(context),
-              getRouteHeaderTextPadding("Login"),
+              getRouteBetterSelfHeaderTextPadding("Login"),
               Padding(
-                // padding: const EdgeInsets.only(left: 25, right: 25, top: 14),
                 padding: getDefaultPaddingInsets(),
                 child: Column(
                   children: <Widget>[
@@ -94,14 +94,16 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   }
 
   Future<http.Response> login(String username, String password) async {
-    final http.Response response = await http.post(
-      loginEndpoint,
-      headers: unAuthenticatedAPIHeaders,
-      body: jsonEncode(<String, String>{
-        'username': username,
-        'password': password,
-      }),
-    );
+    // final http.Response response = await http.post(
+    //   loginEndpoint,
+    //   headers: unAuthenticatedAPIHeaders,
+    //   body: jsonEncode(<String, String>{
+    //     'username': username,
+    //     'password': password,
+    //   }),
+    // );
+
+    final http.Response response = await postLogin(username, password);
 
     if (response.statusCode == 200) {
       var loginResponse = loginResponseFromJson(response.body);

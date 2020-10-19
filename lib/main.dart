@@ -11,7 +11,6 @@ const AppTitle = "BetterSelf";
 
 var routes = <String, WidgetBuilder>{
   HomeRoute: (context) => HomePageScreen(),
-  // LoginRoute: (context) => LoginScreen(),
   LoginFormRoute: (context) => LoginFormScreen(),
   SupplementListRoute: (context) => SupplementListScreen(),
 };
@@ -25,8 +24,8 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    // initialRoute: LoginRoute,
     initialRoute: LoginFormRoute,
+    // initialRoute: SupplementListRoute,
     routes: routes);
 
 class BetterSelfApp extends StatelessWidget {
