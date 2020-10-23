@@ -3,8 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'HomePage/HomePage.dart';
 import 'Login/LoginFormScreen.dart';
-import 'Supplement/SupplementScreen.dart';
-import 'components/DataTable.dart';
+import 'Supplement/SupplementListScreen.dart';
+import 'Demo/DataTable.dart';
 import 'constants/route_constants.dart';
 
 const AppName = "BetterSelf";
@@ -26,7 +26,7 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    initialRoute: DemoRoute,
+    initialRoute: SupplementListRoute,
     // initialRoute: SupplementListRoute,
     routes: routes);
 

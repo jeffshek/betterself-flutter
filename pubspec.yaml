@@ -37,9 +37,9 @@ dependencies:
   flutter_form_builder: 3.13.6
   shared_preferences: ^0.5.12+2
   sqflite: ^1.3.0
+  # had to downgrade cupertino icons for this, remove when done with building
   flutter_gallery: ^2.4.0+20400
-
-  # testing random package for learning
+  flutter_icons: 1.1.0
   english_words: ^3.1.5
 
 dev_dependencies:

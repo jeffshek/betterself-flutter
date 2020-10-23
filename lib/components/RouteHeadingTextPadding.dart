@@ -28,7 +28,7 @@ Padding getRouteHeaderTextPadding(String subheaderTextSting) {
         SizedBox(width: 4),
         Padding(
           padding: const EdgeInsets.only(bottom: 2),
-          child: subheaderText(subheaderTextSting),
+          child: headerText(subheaderTextSting),
         )
       ],
     ),
