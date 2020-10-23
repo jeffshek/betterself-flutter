@@ -7,6 +7,8 @@ import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
+import 'SupplementDetailScreen.dart';
+
 class SupplementListScreen extends StatefulWidget {
   @override
   _SupplementListScreenState createState() => _SupplementListScreenState();
@@ -26,6 +28,15 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
     setState(() => supplements = supplementsData);
   }
 
+  _onSupplementTap(Supplement supplement) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SupplementDetailScreen(supplement: supplement),
+      ),
+    );
+  }
+
   Widget _renderSupplement(Supplement supplement) {
     return Card(
       child: ListTile(
@@ -33,22 +44,10 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
         // leading: FlutterLogo(),
         title: Text(supplement.name),
         trailing: Icon(Icons.more_vert),
+        onTap: () {
+          _onSupplementTap(supplement);
+        },
       ),
-    );
-  }
-
-  Widget getTextWidgets(List<String> strings) {
-    return new Row(
-      children: strings
-          .map(
-            (item) => new Card(
-              child: ListTile(
-                leading: FlutterLogo(),
-                title: Text('One-line with leading widget'),
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 
@@ -72,13 +71,13 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
                   for (var item in supplements) _renderSupplement(item),
                   getDefaultPadding(),
                   Padding(
-                    padding: EdgeInsets.all(25),
+                    padding: EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 5),
+                        // SizedBox(height: 5),
                         AppButton(
-                          textContent: "Add Supplement",
+                          textContent: "Add New Supplement",
                           onPressed: () {},
                         ),
                       ],
