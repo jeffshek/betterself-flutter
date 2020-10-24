@@ -25,8 +25,6 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print (widget.supplement.name);
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

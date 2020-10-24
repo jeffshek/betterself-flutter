@@ -1,8 +1,7 @@
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
+import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
-import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
-import 'package:betterself_flutter/components/SafeAreaDefault.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -26,6 +25,13 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
   _getSupplements() async {
     var supplementsData = await getSupplements();
     setState(() => supplements = supplementsData);
+  }
+
+  Widget getNewSupplementButton() {
+    return AppButton(
+      textContent: "Add New Supplement",
+      onPressed: () {},
+    );
   }
 
   _onSupplementTap(Supplement supplement) {
@@ -54,19 +60,20 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Supplements'),
+      ),
+      drawer: getDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            getSafeAreaDefault(context),
-            getRouteHeaderTextPadding("Supplements"),
+            // getSafeAreaDefault(context),
+            // getRouteHeaderTextPadding("Supplements"),
             Padding(
               padding: getDefaultPaddingInsets(),
               child: Column(
                 children: <Widget>[
-                  AppButton(
-                    textContent: "Add New Supplement",
-                    onPressed: () {},
-                  ),
+                  getNewSupplementButton(),
                   SizedBox(height: 15),
                   for (var item in supplements) _renderSupplement(item),
                   getDefaultPadding(),
@@ -75,11 +82,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // SizedBox(height: 5),
-                        AppButton(
-                          textContent: "Add New Supplement",
-                          onPressed: () {},
-                        ),
+                        getNewSupplementButton(),
                       ],
                     ),
                   ),
