@@ -5,6 +5,8 @@ import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 
 import 'SupplementDetailScreen.dart';
 

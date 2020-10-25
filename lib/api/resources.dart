@@ -39,12 +39,17 @@ getSupplements() async {
   return supplements;
 }
 
+getSupplementInstanceURL(Supplement supplement) {
+  final supplementURL = getResourceEndpoint("supplements");
+  final supplementEditURL = "$supplementURL${supplement.uuid}/";
+  return supplementEditURL;
+}
+
 updateSupplement(Supplement supplement) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
 
-  final supplementURL = getResourceEndpoint("supplements");
-  final supplementEditURL = "$supplementURL${supplement.uuid}/";
+  final supplementEditURL = getSupplementInstanceURL(supplement);
 
   var data = {"name": supplement.name, "notes": supplement.notes};
   var jsonData = json.encode(data);

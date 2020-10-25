@@ -63,7 +63,6 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
             child: Column(
               children: [
                 getSafeAreaDefault(context),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FormBuilderTextField(
@@ -118,7 +117,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                       onPressed: () {},
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
