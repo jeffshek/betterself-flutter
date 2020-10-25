@@ -47,13 +47,33 @@ Widget getDrawer(context) {
           },
         ),
         ListTile(
-          leading: Icon(Icons.account_circle),
-          title: Text('Profile'),
+          leading: Icon(MaterialCommunityIcons.pill),
+          title: Text('Add New Supplement'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              SupplementAddRoute,
+            );
+          },
         ),
         ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Settings'),
+          leading: Icon(MaterialCommunityIcons.login),
+          title: Text('Logout'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              LoginFormRoute,
+            );
+          },
         ),
+        // ListTile(
+        //   leading: Icon(Icons.account_circle),
+        //   title: Text('Profile'),
+        // ),
+        // ListTile(
+        //   leading: Icon(Icons.settings),
+        //   title: Text('Settings'),
+        // ),
       ],
     ),
   );

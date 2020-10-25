@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'HomePage/HomePage.dart';
 import 'Login/LoginFormScreen.dart';
+import 'Supplement/SupplementAddScreen.dart';
 import 'Supplement/SupplementListScreen.dart';
 import 'Demo/DataTable.dart';
 import 'constants/route_constants.dart';
@@ -15,7 +16,8 @@ var routes = <String, WidgetBuilder>{
   HomeRoute: (context) => HomePageScreen(),
   LoginFormRoute: (context) => LoginFormScreen(),
   SupplementListRoute: (context) => SupplementListScreen(),
-  DemoRoute: (context) => DataTableDemo(),
+  SupplementAddRoute: (context) => SupplementAddScreen(),
+  // DemoRoute: (context) => DataTableDemo(),
 };
 
 var _app = MaterialApp(

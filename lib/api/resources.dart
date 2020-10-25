@@ -51,7 +51,7 @@ updateSupplement(Supplement supplement) async {
 
   final supplementEditURL = getSupplementInstanceURL(supplement);
 
-  var data = {"name": supplement.name, "notes": supplement.notes};
+  var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
   var jsonData = json.encode(data);
 
   final http.Response response = await http.post(
