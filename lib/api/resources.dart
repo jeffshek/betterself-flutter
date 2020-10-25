@@ -92,5 +92,10 @@ createSupplement(Supplement supplement, [BuildContext context]) async {
 
   final updatedSupplement = Supplement.fromJson(parsed);
   return updatedSupplement;
+}
 
+createSupplementLog(Supplement supplement, [BuildContext context]) async {
+  final token = await getAccessToken();
+  final headers = getAuthorizedHeaders(token);
+  final supplementURL = getResourceEndpoint("supplementLogs");
 }
