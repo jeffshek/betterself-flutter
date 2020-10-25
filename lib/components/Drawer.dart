@@ -57,16 +57,16 @@ Widget getDrawer(context) {
             );
           },
         ),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.calendar),
-          title: Text('Log Supplement Entry'),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              SupplementLogAddRoute,
-            );
-          },
-        ),
+        // ListTile(
+        //   leading: Icon(MaterialCommunityIcons.calendar),
+        //   title: Text('Log Supplement Entry'),
+        //   onTap: () {
+        //     Navigator.pushNamed(
+        //       context,
+        //       SupplementLogAddRoute,
+        //     );
+        //   },
+        // ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.login),
           title: Text('Logout'),

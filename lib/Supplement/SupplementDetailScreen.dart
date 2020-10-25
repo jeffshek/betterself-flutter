@@ -6,6 +6,7 @@ import 'package:betterself_flutter/components/SafeAreaDefault.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import '../navigator_utilities.dart';
 import 'Forms/SupplementForm.dart';
 
 class SupplementDetailScreen extends StatefulWidget {
@@ -67,7 +68,9 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                     SizedBox(width: 10),
                     NarrowButton(
                       textContent: "Add New Log",
-                      onPressed: () {},
+                      onPressed: () {
+                        pushSupplementLogAddDetails(widget.supplement, context);
+                      },
                     ),
                   ],
                 ),
