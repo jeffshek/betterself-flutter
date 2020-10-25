@@ -29,7 +29,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     //   // called again, and so nothing would appear to happen.
     //   _counter++;
     // });
-    Navigator.pushNamed(context, LoginRoute);
+    // Navigator.pushNamed(context, LoginRoute);
   }
 
   @override

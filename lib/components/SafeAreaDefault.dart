@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const safeAreaHeight = 50.0;
+const safeAreaHeight = 20.0;
 const paddingLeft = 8.0;
 
 SafeArea getSafeAreaDefault(context) {

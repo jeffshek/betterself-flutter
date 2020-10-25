@@ -40,25 +40,47 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
             'name': "${widget.supplement.name}",
             "notes": "${widget.supplement.notes}"
           },
-          child: Column(
-            children: [
-              // getSafeAreaDefault(context),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: NarrowButton(
-                  textContent: "Add Log",
-                  onPressed: () {},
+          child: Container(
+            child: Column(
+              children: [
+                getSafeAreaDefault(context),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      // helperText: "Notes abut the supplement. Is it mental clarity, strength? etc.",
+                      labelText: "Supplement Name",
+                    ),
+                  ),
                 ),
-              ),
-              ...getViewData(widget.supplement),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: NarrowButton(
-                  textContent: "Save Update",
-                  onPressed: () {},
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      helperText: "Notes abut the supplement. Is it mental clarity, strength? etc.",
+                      labelText: "Supplement Notes",
+                    ),
+                  ),
                 ),
-              ),
-            ],
+
+                ...getViewData(widget.supplement),
+                Row(
+                  children: [
+                    NarrowButton(
+                      textContent: "Save Changes",
+                      onPressed: () {},
+                    ),
+                    NarrowButton(
+                      textContent: "Add New Log",
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -11,6 +11,7 @@ Widget getDrawer(context) {
       padding: EdgeInsets.zero,
       children: <Widget>[
         DrawerHeader(
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
           decoration: BoxDecoration(
             color: PRIMARY_COLOR,
           ),
@@ -24,6 +25,16 @@ Widget getDrawer(context) {
               ),
             ),
           ),
+        ),
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.login),
+          title: Text('Login'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              LoginFormRoute,
+            );
+          },
         ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.pill),
