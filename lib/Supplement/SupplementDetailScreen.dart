@@ -100,7 +100,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                   children: [
                     NarrowButton(
                       textContent: "Save Changes",
-                      onPressed: () {
+                      onPressed: () async {
                         _fbKey.currentState.saveAndValidate();
 
                         final currentStateValues = _fbKey.currentState.value;
@@ -109,7 +109,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                         supplement.name = currentStateValues['name'];
                         supplement.notes = currentStateValues['notes'];
 
-                        updateSupplement(supplement);
+                        final updatedSupplement = await updateSupplement(supplement);
                       },
                     ),
                     SizedBox(width: 10),

@@ -4,8 +4,6 @@ import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 getAccessToken() async {
   final prefs = await SharedPreferences.getInstance();
@@ -57,8 +55,8 @@ updateSupplement(Supplement supplement) async {
     body: jsonData,
   );
 
-  print(response.body);
+  final parsed = jsonDecode(response.body);
+  final updatedSupplement = Supplement.fromJson(parsed);
 
-  // final supplements = supplementFromJson(response.body);
-  // return supplements;
+  return updatedSupplement;
 }
