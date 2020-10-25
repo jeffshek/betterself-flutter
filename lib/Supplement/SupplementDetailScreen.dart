@@ -1,3 +1,4 @@
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
@@ -15,7 +16,6 @@ class SupplementDetailScreen extends StatefulWidget {
   _SupplementDetailScreenState createState() => _SupplementDetailScreenState();
 }
 
-
 class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
@@ -25,6 +25,24 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
       Text("Render Data about Supplement"),
     ];
   }
+
+  //
+  // Future<http.Response> saveSupplement(String name, String notes) async {
+  //   final http.Response response = await postLogin(username, password);
+  //
+  //   if (response.statusCode == 200) {
+  //     var loginResponse = loginResponseFromJson(response.body);
+  //     var token = loginResponse.key;
+  //     _saveAccessToken(token);
+  //
+  //     Navigator.pushNamed(
+  //       context,
+  //       SupplementListRoute,
+  //     );
+  //   }
+  //
+  //   return response;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +86,11 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                     attribute: "notes",
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      helperText: "Notes abut the supplement. Is it for mental clarity, strength? etc.",
+                      helperText:
+                          "Notes abut the supplement. Is it for mental clarity, strength? etc.",
                       labelText: "Supplement Notes",
                     ),
-                    validators: [
-                    ],
+                    validators: [],
                   ),
                 ),
                 // ...getViewData(widget.supplement),
@@ -83,9 +101,15 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                     NarrowButton(
                       textContent: "Save Changes",
                       onPressed: () {
-                        _fbKey.currentState.save();
-                        print (_fbKey.currentState.validate());
-                        print(_fbKey.currentState.value);
+                        _fbKey.currentState.saveAndValidate();
+
+                        final currentStateValues = _fbKey.currentState.value;
+                        final supplement = widget.supplement;
+
+                        supplement.name = currentStateValues['name'];
+                        supplement.notes = currentStateValues['notes'];
+
+                        updateSupplement(supplement);
                       },
                     ),
                     SizedBox(width: 10),
