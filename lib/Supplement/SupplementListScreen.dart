@@ -28,7 +28,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
   }
 
   Widget getNewSupplementButton() {
-    return AppButton(
+    return WideAppButton(
       textContent: "Add New Supplement",
       onPressed: () {},
     );
@@ -63,7 +63,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
       appBar: AppBar(
         title: const Text('Supplements'),
       ),
-      drawer: getDrawer(),
+      drawer: getDrawer(context),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

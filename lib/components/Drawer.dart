@@ -1,14 +1,15 @@
+import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../main.dart';
 import '../theme.dart';
 
-Widget getDrawer() {
+Widget getDrawer(context) {
   return Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
-      children: const <Widget>[
+      children: <Widget>[
         DrawerHeader(
           decoration: BoxDecoration(
             color: PRIMARY_COLOR,
@@ -27,6 +28,12 @@ Widget getDrawer() {
         ListTile(
           leading: Icon(MaterialCommunityIcons.pill),
           title: Text('Supplements'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              SupplementListRoute,
+            );
+          },
         ),
         ListTile(
           leading: Icon(Icons.account_circle),

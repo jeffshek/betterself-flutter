@@ -7,7 +7,7 @@ SafeArea getSafeAreaDefault(context) {
   return SafeArea(
     child: Container(
       padding: EdgeInsets.only(left: paddingLeft),
-      alignment: Alignment.centerLeft,
+      // alignment: Alignment.centerLeft,
       width: MediaQuery.of(context).size.width,
       height: safeAreaHeight,
     ),

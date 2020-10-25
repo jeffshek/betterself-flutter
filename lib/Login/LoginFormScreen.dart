@@ -67,7 +67,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                             ],
                           ),
                           SizedBox(height: 18),
-                          AppButton(
+                          WideAppButton(
                             textContent: "Login",
                             onPressed: () {
                               _fbKey.currentState.save();
