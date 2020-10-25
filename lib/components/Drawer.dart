@@ -1,3 +1,4 @@
+import 'package:betterself_flutter/SupplementLog/SupplementLogScreen.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -53,6 +54,16 @@ Widget getDrawer(context) {
             Navigator.pushNamed(
               context,
               SupplementAddRoute,
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.calendar),
+          title: Text('Log Supplement Entry'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              SupplementLogAddRoute,
             );
           },
         ),

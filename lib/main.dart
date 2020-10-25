@@ -7,6 +7,7 @@ import 'Login/LoginFormScreen.dart';
 import 'Supplement/SupplementAddScreen.dart';
 import 'Supplement/SupplementListScreen.dart';
 import 'Demo/DataTable.dart';
+import 'SupplementLog/SupplementLogScreen.dart';
 import 'constants/route_constants.dart';
 
 const AppName = "BetterSelf";
@@ -17,6 +18,7 @@ var routes = <String, WidgetBuilder>{
   LoginFormRoute: (context) => LoginFormScreen(),
   SupplementListRoute: (context) => SupplementListScreen(),
   SupplementAddRoute: (context) => SupplementAddScreen(),
+  SupplementLogAddRoute: (context) => SupplementLogAddScreen(),
   // DemoRoute: (context) => DataTableDemo(),
 };
 

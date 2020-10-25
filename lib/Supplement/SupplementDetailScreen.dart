@@ -21,13 +21,6 @@ class SupplementDetailScreen extends StatefulWidget {
 class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
-  List<Widget> getViewData(Supplement supplement) {
-    return [
-      Text(supplement.name),
-      Text("Render Data about Supplement"),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
