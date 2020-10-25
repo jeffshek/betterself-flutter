@@ -1,6 +1,7 @@
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
+import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flushbar/flushbar.dart';
@@ -93,16 +94,8 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
 
                         final updatedSupplement = await updateSupplement(supplement);
 
-                        Flushbar(
-                          title:  "Success!",
-                          icon: Icon(
-                            Icons.check,
-                            size: 28.0,
-                            color: Colors.lightGreenAccent[200],
-                          ),
-                          message:  "Your changes to ${updatedSupplement.name} have been saved!",
-                          duration:  Duration(seconds: 3),
-                        )..show(context);
+                        final message = "Your changes to ${updatedSupplement.name} have been saved!";
+                        getSuccessSnackbarNotification(context, message);
 
                         FocusManager.instance.primaryFocus.unfocus();
                       },

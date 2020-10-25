@@ -1,8 +1,6 @@
-import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -47,17 +45,6 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
 
                         final currentStateValues = _fbKey.currentState.value;
                         print (currentStateValues);
-
-                        // Flushbar(
-                        //   title:  "Success!",
-                        //   icon: Icon(
-                        //     Icons.check,
-                        //     size: 28.0,
-                        //     color: Colors.lightGreenAccent[200],
-                        //   ),
-                        //   message:  "${updatedSupplement.name} has been created!",
-                        //   duration:  Duration(seconds: 3),
-                        // )..show(context);
 
                         FocusManager.instance.primaryFocus.unfocus();
                       },
