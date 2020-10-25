@@ -14,3 +14,16 @@ getSuccessSnackbarNotification(BuildContext context, String message) {
     duration:  Duration(seconds: 3),
   )..show(context);
 }
+
+getErrorSnackbarNotification(String message, BuildContext context) {
+  Flushbar(
+    title:  "Error!",
+    icon: Icon(
+      Icons.check,
+      size: 28.0,
+      color: Colors.red[200],
+    ),
+    message:  message,
+    duration:  Duration(seconds: 3),
+  )..show(context);
+}

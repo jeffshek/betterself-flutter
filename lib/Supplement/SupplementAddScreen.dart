@@ -1,6 +1,10 @@
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
+import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/models/Supplement.dart';
+import 'package:betterself_flutter/navigator_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -24,10 +28,7 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
       body: SingleChildScrollView(
         child: FormBuilder(
           key: _fbKey,
-          initialValue: {
-            'name': "",
-            "notes": ""
-          },
+          initialValue: {'name': "", "notes": ""},
           autovalidate: true,
           child: Container(
             child: Column(
@@ -44,7 +45,19 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
                         _fbKey.currentState.saveAndValidate();
 
                         final currentStateValues = _fbKey.currentState.value;
-                        print (currentStateValues);
+                        var supplement = Supplement();
+
+                        supplement.name = currentStateValues['name'];
+                        supplement.notes = currentStateValues['notes'];
+
+                        try {
+                          supplement = await createSupplement(supplement, context);
+                          final message = "${supplement.name} has been created!";
+                          pushSupplementDetails(supplement, context);
+                          getSuccessSnackbarNotification(context, message);
+                        } catch (err) {
+
+                        }
 
                         FocusManager.instance.primaryFocus.unfocus();
                       },

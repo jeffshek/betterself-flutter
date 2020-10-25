@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:betterself_flutter/api/api.dart';
+import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,4 +66,31 @@ updateSupplement(Supplement supplement) async {
   final updatedSupplement = Supplement.fromJson(parsed);
 
   return updatedSupplement;
+}
+
+createSupplement(Supplement supplement, [BuildContext context]) async {
+  final token = await getAccessToken();
+  final headers = getAuthorizedHeaders(token);
+  final supplementURL = getResourceEndpoint("supplements");
+
+  var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
+  var jsonData = json.encode(data);
+
+  final http.Response response = await http.post(
+    supplementURL,
+    headers: headers,
+    body: jsonData,
+  );
+
+  final parsed = jsonDecode(response.body);
+
+  if (response.statusCode != 200) {
+    if (context != null) {
+      getErrorSnackbarNotification(response.body, context);
+    }
+  }
+
+  final updatedSupplement = Supplement.fromJson(parsed);
+  return updatedSupplement;
+
 }

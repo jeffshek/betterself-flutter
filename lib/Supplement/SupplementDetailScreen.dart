@@ -4,9 +4,9 @@ import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'Forms/SupplementForm.dart';
 
 class SupplementDetailScreen extends StatefulWidget {
   final Supplement supplement;
@@ -47,36 +47,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
             child: Column(
               children: [
                 getSafeAreaDefault(context),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FormBuilderTextField(
-                    attribute: "name",
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: "Supplement Name",
-                    ),
-                    maxLines: 1,
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FormBuilderTextField(
-                    minLines: 3,
-                    maxLines: 10,
-                    attribute: "notes",
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      helperText:
-                          "Notes abut the supplement. Is it for mental clarity, strength? etc.",
-                      labelText: "Supplement Notes",
-                    ),
-                    validators: [],
-                  ),
-                ),
-                // ...getViewData(widget.supplement),
+                ...getSupplementFormFields(),
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
