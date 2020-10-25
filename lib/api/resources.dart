@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
+import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +40,21 @@ getSupplements() async {
 
   final supplements = supplementFromJson(response.body);
   return supplements;
+}
+
+getSupplementLogs() async {
+  final token = await getAccessToken();
+  final headers = getAuthorizedHeaders(token);
+
+  final resourceURL = getResourceEndpoint("supplement_logs");
+
+  final http.Response response = await http.get(
+    resourceURL,
+    headers: headers,
+  );
+
+  final supplementLogs = supplementLogFromJson(response.body);
+  return supplementLogs;
 }
 
 getSupplementInstanceURL(Supplement supplement) {

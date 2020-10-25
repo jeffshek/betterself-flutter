@@ -7,6 +7,7 @@ import 'Login/LoginFormScreen.dart';
 import 'Supplement/SupplementAddScreen.dart';
 import 'Supplement/SupplementListScreen.dart';
 import 'Demo/DataTable.dart';
+import 'SupplementLog/SupplementLogListScreen.dart';
 import 'SupplementLog/SupplementLogScreen.dart';
 import 'constants/route_constants.dart';
 
@@ -19,6 +20,7 @@ var routes = <String, WidgetBuilder>{
   SupplementListRoute: (context) => SupplementListScreen(),
   SupplementAddRoute: (context) => SupplementAddScreen(),
   SupplementLogAddRoute: (context) => SupplementLogAddScreen(),
+  SupplementLogListRoute: (context) => SupplementLogListScreen(),
   // DemoRoute: (context) => DataTableDemo(),
 };
 
@@ -31,7 +33,7 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    initialRoute: SupplementListRoute,
+    initialRoute: SupplementLogListRoute,
     // initialRoute: SupplementListRoute,
     routes: routes);
 

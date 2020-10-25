@@ -48,12 +48,22 @@ Widget getDrawer(context) {
           },
         ),
         ListTile(
-          leading: Icon(MaterialCommunityIcons.pill),
+          leading: Icon(MaterialCommunityIcons.plus_box_outline),
           title: Text('Add New Supplement'),
           onTap: () {
             Navigator.pushNamed(
               context,
               SupplementAddRoute,
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.calendar_check),
+          title: Text('Supplement Logs'),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              SupplementLogListRoute,
             );
           },
         ),

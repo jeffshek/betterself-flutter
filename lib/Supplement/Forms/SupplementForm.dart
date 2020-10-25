@@ -1,10 +1,11 @@
+import 'package:betterself_flutter/constants/form_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 getSupplementFormFields() {
   return [
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: DEFAULT_FORM_PADDING,
       child: FormBuilderTextField(
         attribute: "name",
         decoration: InputDecoration(
@@ -18,7 +19,7 @@ getSupplementFormFields() {
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: DEFAULT_FORM_PADDING,
       child: FormBuilderTextField(
         minLines: 3,
         maxLines: 10,
