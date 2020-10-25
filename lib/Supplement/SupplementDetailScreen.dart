@@ -40,6 +40,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
             'name': "${widget.supplement.name}",
             "notes": "${widget.supplement.notes}"
           },
+          autovalidate: true,
           child: Container(
             child: Column(
               children: [
@@ -47,32 +48,47 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
+                  child: FormBuilderTextField(
+                    attribute: "name",
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      // helperText: "Notes abut the supplement. Is it mental clarity, strength? etc.",
                       labelText: "Supplement Name",
                     ),
+                    maxLines: 1,
+                    validators: [
+                      FormBuilderValidators.required(),
+                    ],
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
+                  child: FormBuilderTextField(
+                    minLines: 3,
+                    maxLines: 10,
+                    attribute: "notes",
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      helperText: "Notes abut the supplement. Is it mental clarity, strength? etc.",
+                      helperText: "Notes abut the supplement. Is it for mental clarity, strength? etc.",
                       labelText: "Supplement Notes",
                     ),
+                    validators: [
+                    ],
                   ),
                 ),
-
-                ...getViewData(widget.supplement),
+                // ...getViewData(widget.supplement),
+                SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     NarrowButton(
                       textContent: "Save Changes",
-                      onPressed: () {},
+                      onPressed: () {
+                        _fbKey.currentState.save();
+                        print (_fbKey.currentState.validate());
+                        print(_fbKey.currentState.value);
+                      },
                     ),
+                    SizedBox(width: 10),
                     NarrowButton(
                       textContent: "Add New Log",
                       onPressed: () {},
