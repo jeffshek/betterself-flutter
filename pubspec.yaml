@@ -42,6 +42,7 @@ dependencies:
   flutter_icons: 1.1.0
   english_words: ^3.1.5
   pull_to_refresh: ^1.6.2
+  flushbar: 1.10.4
 
 dev_dependencies:
   flutter_test:

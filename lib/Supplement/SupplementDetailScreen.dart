@@ -3,6 +3,7 @@ import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -25,24 +26,6 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
       Text("Render Data about Supplement"),
     ];
   }
-
-  //
-  // Future<http.Response> saveSupplement(String name, String notes) async {
-  //   final http.Response response = await postLogin(username, password);
-  //
-  //   if (response.statusCode == 200) {
-  //     var loginResponse = loginResponseFromJson(response.body);
-  //     var token = loginResponse.key;
-  //     _saveAccessToken(token);
-  //
-  //     Navigator.pushNamed(
-  //       context,
-  //       SupplementListRoute,
-  //     );
-  //   }
-  //
-  //   return response;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +92,19 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                         supplement.notes = currentStateValues['notes'];
 
                         final updatedSupplement = await updateSupplement(supplement);
+
+                        Flushbar(
+                          title:  "Success!",
+                          icon: Icon(
+                            Icons.check,
+                            size: 28.0,
+                            color: Colors.lightGreenAccent[200],
+                          ),
+                          message:  "Your changes to ${updatedSupplement.name} have been saved!",
+                          duration:  Duration(seconds: 3),
+                        )..show(context);
+
+                        FocusManager.instance.primaryFocus.unfocus();
                       },
                     ),
                     SizedBox(width: 10),
