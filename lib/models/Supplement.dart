@@ -29,15 +29,16 @@ class Supplement {
   String displayName;
   dynamic isTakenWithFood;
 
+  // sort of wonder if there's a better way to do this for optional fields ...
   factory Supplement.fromJson(Map<String, dynamic> json) => Supplement(
     uuid: json["uuid"],
-    created: DateTime.parse(json["created"]),
-    modified: DateTime.parse(json["modified"]),
+    created: json["created"] == null ? null : DateTime.parse(json["created"]),
+    modified: json["modified"] == null ? null :DateTime.parse(json["modified"]),
     name: json["name"],
-    notes: json["notes"],
-    ingredientCompositions: List<dynamic>.from(json["ingredient_compositions"].map((x) => x)),
-    displayName: json["display_name"],
-    isTakenWithFood: json["is_taken_with_food"],
+    notes: json["notes"] == null ? null : json["notes"],
+    ingredientCompositions: json["ingredient_compositions"] == null ? null : List<dynamic>.from(json["ingredient_compositions"].map((x) => x)),
+    displayName: json["display_name"] == null ? null : json["display_name"],
+    isTakenWithFood: json["is_taken_with_food"] == null ? null : json["is_taken_with_food"],
   );
 
   Map<String, dynamic> toJson() => {

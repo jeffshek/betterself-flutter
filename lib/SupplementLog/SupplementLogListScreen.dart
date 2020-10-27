@@ -39,8 +39,61 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
     setState(() => supplementLogs = supplementLogsData);
   }
 
+  Widget _renderSupplementLog(SupplementLog supplementLog) {
+
+    var timeFormatted = supplementLog.time.toIso8601String();
+    var displayName = supplementLog.displayName;
+
+    return Card(
+      child: ListTile(
+        leading: Icon(MaterialCommunityIcons.pill),
+        title: Text(displayName),
+        trailing: Icon(Icons.more_vert),
+        // onTap: () {
+        //   _onSupplementTap(supplement);
+        // },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Supplement Logs'),
+      ),
+      drawer: getDrawer(context),
+      body: SmartRefresher(
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: getDefaultPaddingInsets(),
+                child: Column(
+                  children: <Widget>[
+                    // getNewSupplementButton(),
+                    SizedBox(height: 15),
+                    for (var item in supplementLogs) _renderSupplementLog(item),
+                    getDefaultPadding(),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // getNewSupplementButton(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
