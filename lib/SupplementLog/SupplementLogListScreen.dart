@@ -108,7 +108,7 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
                   children: <Widget>[
                     // getNewSupplementButton(),
                     SizedBox(height: 15),
-                    for (DateTime index in _supplementLogsIndex.keys) _renderSupplementDateIndex(index),
+                    // for (DateTime index in _supplementLogsIndex.keys) _renderSupplementDateIndex(index),
                     // for (var item in _supplementLogs)
                     //   _renderSupplementLog(item),
                     getDefaultPadding(),
