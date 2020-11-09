@@ -19,7 +19,7 @@ var routes = <String, WidgetBuilder>{
   LoginFormRoute: (context) => LoginFormScreen(),
   SupplementListRoute: (context) => SupplementListScreen(),
   SupplementAddRoute: (context) => SupplementAddScreen(),
-  SupplementLogAddRoute: (context) => SupplementLogAddScreen(),
+  // SupplementLogAddRoute: (context) => SupplementLogAddScreen(),
   SupplementLogListRoute: (context) => SupplementLogListScreen(),
   // DemoRoute: (context) => DataTableDemo(),
 };
