@@ -33,7 +33,8 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    initialRoute: SupplementLogListRoute,
+    initialRoute: LoginFormRoute,
+    // initialRoute: SupplementLogListRoute,
     // initialRoute: SupplementListRoute,
     routes: routes);
 

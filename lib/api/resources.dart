@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
@@ -7,6 +8,8 @@ import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'constants.dart';
 
 getAccessToken() async {
   final prefs = await SharedPreferences.getInstance();
@@ -58,9 +61,15 @@ getSupplementLogs() async {
 }
 
 getSupplementInstanceURL(Supplement supplement) {
-  final supplementURL = getResourceEndpoint("supplements");
+  final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_RESOURCE);
   final supplementEditURL = "$supplementURL${supplement.uuid}/";
   return supplementEditURL;
+}
+
+getSupplementLogInstanceURL(SupplementLog instance) {
+  final resourceURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_LOGS_RESOURCE);
+  final instanceEditURL = "$resourceURL${instance.uuid}/";
+  return instanceEditURL;
 }
 
 updateSupplement(Supplement supplement) async {
@@ -70,8 +79,8 @@ updateSupplement(Supplement supplement) async {
   final supplementEditURL = getSupplementInstanceURL(supplement);
 
   var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
-  var jsonData = json.encode(data);
 
+  var jsonData = json.encode(data);
   final http.Response response = await http.post(
     supplementEditURL,
     headers: headers,
@@ -84,10 +93,43 @@ updateSupplement(Supplement supplement) async {
   return updatedSupplement;
 }
 
+updateSupplementLog(SupplementLog instance) async {
+  final token = await getAccessToken();
+  final headers = getAuthorizedHeaders(token);
+
+  final instanceEditURL = getSupplementLogInstanceURL(instance);
+
+  var data = {
+    "time": instance.time.toString(),
+    "notes": instance.notes.trim(),
+    "quantity": instance.quantity
+  };
+
+  var jsonData = json.encode(data);
+
+  final http.Response response = await http.post(
+    instanceEditURL,
+    headers: headers,
+    body: jsonData,
+  );
+
+  // if (response.statusCode != 200) {
+  //   var errorMessage = "Error When Submitting to $instanceEditURL with $jsonData";
+  //
+  //   print(errorMessage);
+  //   log(errorMessage);
+  // }
+
+  final parsed = jsonDecode(response.body);
+  final updatedInstance = SupplementLog.fromJson(parsed);
+
+  return updatedInstance;
+}
+
 createSupplement(Supplement supplement, [BuildContext context]) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
-  final supplementURL = getResourceEndpoint("supplements");
+  final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_RESOURCE);
 
   var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
   var jsonData = json.encode(data);
@@ -113,5 +155,5 @@ createSupplement(Supplement supplement, [BuildContext context]) async {
 createSupplementLog(Supplement supplement, [BuildContext context]) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
-  final supplementURL = getResourceEndpoint("supplementLogs");
+  final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_LOGS_RESOURCE);
 }

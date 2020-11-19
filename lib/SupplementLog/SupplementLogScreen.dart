@@ -43,28 +43,30 @@ class _SupplementLogAddScreenState extends State<SupplementLogAddScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    NarrowButton(
-                      textContent: "Log ${widget.supplement.name}",
-                      onPressed: () async {
-                        _fbKey.currentState.saveAndValidate();
+                    Expanded(
+                      child: NarrowButton(
+                        textContent: "Log ${widget.supplement.name}",
+                        onPressed: () async {
+                          _fbKey.currentState.saveAndValidate();
 
-                        final currentStateValues = _fbKey.currentState.value;
-                        var supplement = Supplement();
+                          final currentStateValues = _fbKey.currentState.value;
+                          var supplement = Supplement();
 
-                        supplement.name = currentStateValues['name'];
-                        supplement.notes = currentStateValues['notes'];
+                          supplement.name = currentStateValues['name'];
+                          supplement.notes = currentStateValues['notes'];
 
-                        try {
-                          supplement =
-                              await createSupplement(supplement, context);
-                          final message =
-                              "${supplement.name} has been created!";
-                          pushSupplementDetails(supplement, context);
-                          getSuccessSnackbarNotification(context, message);
-                        } catch (err) {}
+                          try {
+                            supplement =
+                                await createSupplement(supplement, context);
+                            final message =
+                                "${supplement.name} has been created!";
+                            pushSupplementDetails(supplement, context);
+                            getSuccessSnackbarNotification(context, message);
+                          } catch (err) {}
 
-                        FocusManager.instance.primaryFocus.unfocus();
-                      },
+                          FocusManager.instance.primaryFocus.unfocus();
+                        },
+                      ),
                     ),
                   ],
                 ),

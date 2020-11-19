@@ -102,6 +102,7 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
         headerText(localTimeDateFormat),
         SizedBox(height: 5),
         for (SupplementLog supplementLog in indexSupplementLogs)
+        // for (SupplementLog supplementLog in indexSupplementLogs.sublist(0,5))
           _renderSupplementLog(supplementLog),
         SizedBox(height: 25),
       ],

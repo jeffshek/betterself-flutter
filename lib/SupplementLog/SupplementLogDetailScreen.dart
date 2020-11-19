@@ -1,10 +1,14 @@
 import 'package:betterself_flutter/SupplementLog/Forms/SupplementLogForm.dart';
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
+import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'dart:developer';
 
 class SupplementLogDetailScreen extends StatefulWidget {
   final SupplementLog supplementLog;
@@ -40,14 +44,31 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    NarrowButton(
-                      textContent: "Edit ${widget.supplementLog.displayName}",
-                      onPressed: () async {
-                        _fbKey.currentState.saveAndValidate();
+                    Expanded(
+                      child: NarrowButton(
+                        textContent: "Edit ${widget.supplementLog.displayName}",
+                        onPressed: () async {
+                          _fbKey.currentState.saveAndValidate();
 
-                        final currentStateValues = _fbKey.currentState.value;
-                        FocusManager.instance.primaryFocus.unfocus();
-                      },
+                          final currentStateValues = _fbKey.currentState.value;
+                          final instance = widget.supplementLog;
+
+                          instance.time = currentStateValues['time'];
+                          instance.quantity = currentStateValues['quantity'];
+                          instance.notes = currentStateValues['notes'];
+
+                          final updatedInstance = await updateSupplementLog(instance);
+
+                          final message = "Your changes to ${updatedInstance.supplement.name} Log have been saved!";
+                          getSuccessSnackbarNotification(context, message);
+
+                          FocusManager.instance.primaryFocus.unfocus();
+
+                          // Navigator.pop(context);
+                          Navigator.pushNamed(context, SupplementLogListRoute);
+
+                        },
+                      ),
                     ),
                   ],
                 ),
