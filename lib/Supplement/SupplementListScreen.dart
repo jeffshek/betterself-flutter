@@ -2,6 +2,8 @@ import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
+import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -42,8 +44,10 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
 
   Widget getNewSupplementButton() {
     return WideAppButton(
-      textContent: "Add New Supplement",
-      onPressed: () {},
+      textContent: TitleConstants.ADD_NEW_SUPPLEMENT,
+      onPressed: () {
+        Navigator.pushNamed(context, SupplementAddRoute);
+      },
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:betterself_flutter/navigator_utilities.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Supplement'),
+        title: const Text(TitleConstants.ADD_NEW_SUPPLEMENT),
       ),
       drawer: getDrawer(context),
       body: SingleChildScrollView(

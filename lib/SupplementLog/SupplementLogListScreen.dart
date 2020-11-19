@@ -1,7 +1,9 @@
 import 'package:betterself_flutter/api/resources.dart';
+import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/components/TextComponents.dart';
+import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -35,6 +37,13 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
 
   void _onLoading() async {
     _refreshController.loadComplete();
+  }
+
+  Widget getNewSupplementLogButton() {
+    return WideAppButton(
+      textContent: TitleConstants.ADD_NEW_SUPPLEMENT_LOG,
+      onPressed: () {},
+    );
   }
 
   _getSupplementLogs() async {

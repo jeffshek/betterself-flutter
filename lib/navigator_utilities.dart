@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Supplement/SupplementDetailScreen.dart';
-import 'SupplementLog/SupplementLogScreen.dart';
+import 'SupplementLog/SupplementLogAddScreen.dart';
 
 pushSupplementDetails(Supplement supplement, BuildContext context) {
   Navigator.push(

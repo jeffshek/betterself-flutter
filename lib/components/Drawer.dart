@@ -1,5 +1,6 @@
-import 'package:betterself_flutter/SupplementLog/SupplementLogScreen.dart';
+import 'package:betterself_flutter/SupplementLog/SupplementLogAddScreen.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
+import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -49,7 +50,7 @@ Widget getDrawer(context) {
         ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.plus_box_outline),
-          title: Text('Add New Supplement'),
+          title: Text(TitleConstants.ADD_NEW_SUPPLEMENT),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -67,16 +68,16 @@ Widget getDrawer(context) {
             );
           },
         ),
-        // ListTile(
-        //   leading: Icon(MaterialCommunityIcons.calendar),
-        //   title: Text('Log Supplement Entry'),
-        //   onTap: () {
-        //     Navigator.pushNamed(
-        //       context,
-        //       SupplementLogAddRoute,
-        //     );
-        //   },
-        // ),
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.calendar),
+          title: Text(TitleConstants.ADD_NEW_SUPPLEMENT_LOG),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE,
+            );
+          },
+        ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.login),
           title: Text('Logout'),
