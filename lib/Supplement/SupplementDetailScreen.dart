@@ -69,7 +69,7 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                     NarrowButton(
                       textContent: "Add New Log",
                       onPressed: () {
-                        pushSupplementLogAddDetails(widget.supplement, context);
+                        pushSupplementLogRouteAddDetails(widget.supplement, context);
                       },
                     ),
                   ],

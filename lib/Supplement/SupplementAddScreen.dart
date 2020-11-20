@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
@@ -52,12 +54,16 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
                         supplement.notes = currentStateValues['notes'];
 
                         try {
-                          supplement = await createSupplement(supplement, context);
-                          final message = "${supplement.name} has been created!";
-                          pushSupplementDetails(supplement, context);
-                          getSuccessSnackbarNotification(context, message);
-                        } catch (err) {
+                          supplement =
+                              await createSupplement(supplement, context);
+                          final message =
+                              "${supplement.name} has been created!";
 
+                          pushSupplementRouteDetails(supplement, context);
+                          getSuccessSnackbarNotification(context, message);
+
+                        } catch (err) {
+                          log("Error Occurred When Making Supplement $supplement.name");
                         }
 
                         FocusManager.instance.primaryFocus.unfocus();

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'Supplement/SupplementDetailScreen.dart';
 import 'SupplementLog/SupplementLogAddScreen.dart';
 
-pushSupplementDetails(Supplement supplement, BuildContext context) {
+pushSupplementRouteDetails(Supplement supplement, BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -14,7 +14,7 @@ pushSupplementDetails(Supplement supplement, BuildContext context) {
   );
 }
 
-pushSupplementLogAddDetails(Supplement supplement, BuildContext context) {
+pushSupplementLogRouteAddDetails(Supplement supplement, BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(

@@ -1,4 +1,3 @@
-import 'package:betterself_flutter/SupplementLog/SupplementLogAddScreen.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ Widget getDrawer(context) {
         ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.login),
-          title: Text('Login'),
+          title: Text(TitleConstants.LOGIN),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -40,7 +39,7 @@ Widget getDrawer(context) {
         ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.pill),
-          title: Text('Supplements'),
+          title: Text(TitleConstants.SUPPLEMENTS),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -60,7 +59,7 @@ Widget getDrawer(context) {
         ),
         ListTile(
           leading: Icon(MaterialCommunityIcons.calendar_check),
-          title: Text('Supplement Logs'),
+          title: Text(TitleConstants.SUPPLEMENT_LOGS),
           onTap: () {
             Navigator.pushNamed(
               context,

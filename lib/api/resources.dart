@@ -152,8 +152,35 @@ createSupplement(Supplement supplement, [BuildContext context]) async {
   return updatedSupplement;
 }
 
-createSupplementLog(Supplement supplement, [BuildContext context]) async {
+createSupplementLog(SupplementLog supplementLog, [BuildContext context]) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
-  final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_LOGS_RESOURCE);
+  final url = getResourceEndpoint(BACKEND_SUPPLEMENTS_LOGS_RESOURCE);
+
+  var data = {
+    "supplement_uuid": supplementLog.supplement.uuid,
+    "time": supplementLog.time.toIso8601String(),
+    "notes": supplementLog.notes,
+  };
+
+  log(supplementLog.supplement.uuid);
+
+  var jsonData = json.encode(data);
+
+  final http.Response response = await http.post(
+    url,
+    headers: headers,
+    body: jsonData,
+  );
+
+  final parsed = jsonDecode(response.body);
+
+  if (response.statusCode != 200) {
+    if (context != null) {
+      getErrorSnackbarNotification(response.body, context);
+    }
+  }
+
+  final createdInstance = SupplementLog.fromJson(parsed);
+  return createdInstance;
 }

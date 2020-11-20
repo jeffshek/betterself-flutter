@@ -77,7 +77,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Supplements'),
+        title: const Text(TitleConstants.SUPPLEMENTS),
       ),
       drawer: getDrawer(context),
       body: SmartRefresher(

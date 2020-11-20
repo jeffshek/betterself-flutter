@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:betterself_flutter/SupplementLog/Forms/SupplementLogForm.dart';
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
+import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:betterself_flutter/navigator_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -43,30 +47,38 @@ class _SupplementLogAddScreenState extends State<SupplementLogAddScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: NarrowButton(
-                        textContent: "Log ${widget.supplement.name}",
-                        onPressed: () async {
-                          _fbKey.currentState.saveAndValidate();
+                    NarrowButton(
+                      textContent: "Log ${widget.supplement.name}",
+                      onPressed: () async {
+                        log("Adding Supplement Pressed");
 
-                          final currentStateValues = _fbKey.currentState.value;
-                          var supplement = Supplement();
+                        _fbKey.currentState.saveAndValidate();
 
-                          supplement.name = currentStateValues['name'];
-                          supplement.notes = currentStateValues['notes'];
+                        final currentStateValues = _fbKey.currentState.value;
 
-                          try {
-                            supplement =
-                                await createSupplement(supplement, context);
-                            final message =
-                                "${supplement.name} has been created!";
-                            pushSupplementDetails(supplement, context);
-                            getSuccessSnackbarNotification(context, message);
-                          } catch (err) {}
+                        var instance = SupplementLog();
 
-                          FocusManager.instance.primaryFocus.unfocus();
-                        },
-                      ),
+                        instance.supplement = widget.supplement;
+                        instance.time = currentStateValues['time'];
+                        instance.quantity = currentStateValues['quantity'];
+                        instance.notes = currentStateValues['notes'];
+
+                        try {
+                          instance = await createSupplementLog(instance, context);
+                          final message =
+                              "${instance.supplement.name} Log has been created!";
+
+
+                          Navigator.pushNamed(context, SupplementListRoute);
+
+                          getSuccessSnackbarNotification(context, message);
+                        } catch (err) {
+                          log("Error When Creating Supplement Log");
+                          throw(err);
+                        }
+
+                        FocusManager.instance.primaryFocus.unfocus();
+                      },
                     ),
                   ],
                 ),
