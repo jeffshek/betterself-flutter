@@ -3,6 +3,7 @@ import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -58,11 +59,13 @@ class _SupplementDetailScreenState extends State<SupplementDetailScreen> {
                         supplement.notes = currentStateValues['notes'];
 
                         final updatedSupplement = await updateSupplement(supplement);
+                        FocusManager.instance.primaryFocus.unfocus();
+
+                        Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LIST_ROUTE);
 
                         final message = "Your changes to ${updatedSupplement.name} have been saved!";
                         getSuccessSnackbarNotification(context, message);
 
-                        FocusManager.instance.primaryFocus.unfocus();
                       },
                     ),
                     SizedBox(width: 10),

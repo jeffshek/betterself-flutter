@@ -64,9 +64,7 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
 
                           FocusManager.instance.primaryFocus.unfocus();
 
-                          // Navigator.pop(context);
-                          Navigator.pushNamed(context, SupplementLogListRoute);
-
+                          Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
                         },
                       ),
                     ),

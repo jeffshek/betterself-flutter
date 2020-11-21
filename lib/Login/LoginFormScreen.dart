@@ -101,7 +101,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
       Navigator.pushNamed(
         context,
-        SupplementListRoute,
+        RouteConstants.SUPPLEMENT_LIST_ROUTE,
       );
     }
 

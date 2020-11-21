@@ -46,7 +46,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
     return WideAppButton(
       textContent: TitleConstants.ADD_NEW_SUPPLEMENT,
       onPressed: () {
-        Navigator.pushNamed(context, SupplementAddRoute);
+        Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_ADD_ROUTE);
       },
     );
   }

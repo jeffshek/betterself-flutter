@@ -68,10 +68,9 @@ class _SupplementLogAddScreenState extends State<SupplementLogAddScreen> {
                           final message =
                               "${instance.supplement.name} Log has been created!";
 
-
-                          Navigator.pushNamed(context, SupplementListRoute);
-
+                          Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE);
                           getSuccessSnackbarNotification(context, message);
+
                         } catch (err) {
                           log("Error When Creating Supplement Log");
                           throw(err);

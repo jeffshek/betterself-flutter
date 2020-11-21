@@ -2,14 +2,13 @@ class TitleConstants {
  static const LOGIN = "Login";
 
  static const SUPPLEMENTS = "Supplements";
- static const SUPPLEMENT_LOGS = "Supplement Logs";
+ static const SUPPLEMENT_LOGS = "Supplement Logs History";
  static const ADD_NEW_SUPPLEMENT = "Add New Supplement";
- static const ADD_NEW_SUPPLEMENT_LOG = "Add New Supplement Log";
- static const CHOOSE_SUPPLEMENT_IN_LOG = "Choose Supplement To Log";
+ static const ADD_NEW_SUPPLEMENT_LOG = "Add Supplement Log";
 }
 
 class PageActionLabelConstants {
- static const CHOOSE_SUPPLEMENT_TO_LOG = "Choose Supplement To Log";
+ static const CHOOSE_SUPPLEMENT_IN_LOG = "Choose A Supplement To Log";
 }
 
 class DateTimeFormatConstants {

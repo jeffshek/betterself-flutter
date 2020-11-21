@@ -68,10 +68,8 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
 
   Widget getNewSupplementButton() {
     return WideAppButton(
-      textContent: TitleConstants.CHOOSE_SUPPLEMENT_IN_LOG,
-      onPressed: () {
-        // Navigator.pushNamed(context, SupplementAddRoute);
-      },
+      textContent: PageActionLabelConstants.CHOOSE_SUPPLEMENT_IN_LOG,
+      onPressed: () {},
     );
   }
 

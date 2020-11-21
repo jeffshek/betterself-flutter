@@ -33,7 +33,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              LoginFormRoute,
+              RouteConstants.LOGIN_FORM_ROUTE,
             );
           },
         ),
@@ -43,7 +43,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              SupplementListRoute,
+              RouteConstants.SUPPLEMENT_LIST_ROUTE,
             );
           },
         ),
@@ -53,7 +53,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              SupplementAddRoute,
+              RouteConstants.SUPPLEMENT_ADD_ROUTE,
             );
           },
         ),
@@ -63,7 +63,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              SupplementLogListRoute,
+              RouteConstants.SUPPLEMENT_LIST_ROUTE,
             );
           },
         ),
@@ -83,7 +83,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              LoginFormRoute,
+              RouteConstants.LOGIN_FORM_ROUTE,
             );
           },
         ),

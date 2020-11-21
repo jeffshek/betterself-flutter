@@ -15,12 +15,12 @@ const AppName = "BetterSelf";
 const AppTitle = "BetterSelf";
 
 var routes = <String, WidgetBuilder>{
-  HomeRoute: (context) => HomePageScreen(),
-  LoginFormRoute: (context) => LoginFormScreen(),
-  SupplementListRoute: (context) => SupplementListScreen(),
-  SupplementAddRoute: (context) => SupplementAddScreen(),
+  RouteConstants.HOME_ROUTE: (context) => HomePageScreen(),
+  RouteConstants.LOGIN_FORM_ROUTE: (context) => LoginFormScreen(),
+  RouteConstants.SUPPLEMENT_LIST_ROUTE: (context) => SupplementListScreen(),
+  RouteConstants.SUPPLEMENT_ADD_ROUTE: (context) => SupplementAddScreen(),
   RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE: (context) => SupplementLogChooseSupplementAddScreen(),
-  SupplementLogListRoute: (context) => SupplementLogListScreen(),
+  RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE: (context) => SupplementLogListScreen(),
 };
 
 var _app = MaterialApp(
@@ -32,7 +32,7 @@ var _app = MaterialApp(
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    initialRoute: LoginFormRoute,
+    initialRoute: RouteConstants.LOGIN_FORM_ROUTE,
     // initialRoute: SupplementLogListRoute,
     // initialRoute: SupplementListRoute,
     routes: routes);
