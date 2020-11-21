@@ -2,9 +2,20 @@ import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../main.dart';
-import '../theme.dart';
+
+import 'package:betterself_flutter/main.dart';
+import 'package:betterself_flutter/theme.dart';
+
+_launchBetterSelfURL() async {
+  const url = 'https://app.betterself.io/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 Widget getDrawer(context) {
   return Drawer(
@@ -63,7 +74,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              RouteConstants.SUPPLEMENT_LIST_ROUTE,
+              RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE,
             );
           },
         ),
@@ -78,6 +89,13 @@ Widget getDrawer(context) {
           },
         ),
         ListTile(
+          leading: Icon(MaterialCommunityIcons.access_point_network),
+          title: Text('Access Analytics (Web)'),
+          onTap: () {
+            _launchBetterSelfURL();
+          },
+        ),
+        ListTile(
           leading: Icon(MaterialCommunityIcons.login),
           title: Text('Logout'),
           onTap: () {
@@ -87,14 +105,6 @@ Widget getDrawer(context) {
             );
           },
         ),
-        // ListTile(
-        //   leading: Icon(Icons.account_circle),
-        //   title: Text('Profile'),
-        // ),
-        // ListTile(
-        //   leading: Icon(Icons.settings),
-        //   title: Text('Settings'),
-        // ),
       ],
     ),
   );
