@@ -4,10 +4,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'HomePage/HomePage.dart';
 import 'Login/LoginFormScreen.dart';
+import 'Logout/LogoutScreen.dart';
 import 'Supplement/SupplementAddScreen.dart';
 import 'Supplement/SupplementListScreen.dart';
 import 'SupplementLog/Forms/SupplementLogChooseSupplementToAdd.dart';
-import 'SupplementLog/SupplementLogAddScreen.dart';
 import 'SupplementLog/SupplementLogListScreen.dart';
 import 'constants/route_constants.dart';
 
@@ -21,6 +21,7 @@ var routes = <String, WidgetBuilder>{
   RouteConstants.SUPPLEMENT_ADD_ROUTE: (context) => SupplementAddScreen(),
   RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE: (context) => SupplementLogChooseSupplementAddScreen(),
   RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE: (context) => SupplementLogListScreen(),
+  RouteConstants.LOGOUT_ROUTE: (context) => LogoutScreen(),
 };
 
 var _app = MaterialApp(

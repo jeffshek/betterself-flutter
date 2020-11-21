@@ -83,7 +83,7 @@ Widget getDrawer(context) {
           onTap: () {
             Navigator.pushNamed(
               context,
-              RouteConstants.LOGIN_FORM_ROUTE,
+              RouteConstants.LOGOUT_ROUTE,
             );
           },
         ),
