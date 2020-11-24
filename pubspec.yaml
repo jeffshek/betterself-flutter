@@ -43,11 +43,17 @@ dependencies:
   pull_to_refresh: ^1.6.2
   flushbar: 1.10.4
   url_launcher: 5.7.2
-  flutter_launcher_icons: ^0.8.1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.8.1
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+
 
 flutter:
   uses-material-design: true
