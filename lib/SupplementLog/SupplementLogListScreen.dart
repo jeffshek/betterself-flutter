@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
@@ -51,6 +53,13 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
 
   _getSupplementLogs() async {
     var supplementLogsData = await getSupplementLogs();
+
+    log(supplementLogsData.length.toString());
+
+    if (supplementLogsData.length > 100) {
+      supplementLogsData = supplementLogsData.sublist(0, 100);
+    }
+
     for (SupplementLog supplementLog in supplementLogsData) {
       var localTimestamp = supplementLog.time.toLocal();
       DateTime supplementDate = DateTime(
