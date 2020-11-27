@@ -45,14 +45,16 @@ getSupplements() async {
   return supplements;
 }
 
-getSupplementLogs() async {
+getSupplementLogs({int limit = 200}) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
 
   final resourceURL = getResourceEndpoint("supplement_logs");
 
+  final resourceURLwithLimit = resourceURL + "?limit=$limit";
+
   final http.Response response = await http.get(
-    resourceURL,
+    resourceURLwithLimit,
     headers: headers,
   );
 

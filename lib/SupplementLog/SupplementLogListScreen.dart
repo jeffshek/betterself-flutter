@@ -94,7 +94,6 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
 
     return Card(
       child: ListTile(
-        // leading: Icon(MaterialCommunityIcons.pill),
         leading: Text(localTimeDateFormat),
         title: Text(label),
         subtitle: Text(supplementLog.notes),
