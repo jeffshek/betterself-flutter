@@ -165,8 +165,6 @@ createSupplementLog(SupplementLog supplementLog, [BuildContext context]) async {
     "notes": supplementLog.notes,
   };
 
-  log(supplementLog.supplement.uuid);
-
   var jsonData = json.encode(data);
 
   final http.Response response = await http.post(

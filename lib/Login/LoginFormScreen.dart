@@ -112,13 +112,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     final prefs = await SharedPreferences.getInstance();
     final key = 'accessToken';
     prefs.setString(key, token);
-    print('Saved Token');
   }
 
   _getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'accessToken';
     var token = prefs.getString(key) ?? "";
-    print("Saved Token is $token");
   }
 }

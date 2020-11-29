@@ -54,8 +54,6 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
   _getSupplementLogs() async {
     var supplementLogsData = await getSupplementLogs();
 
-    log(supplementLogsData.length.toString());
-
     if (supplementLogsData.length > 100) {
       supplementLogsData = supplementLogsData.sublist(0, 100);
     }

@@ -52,7 +52,6 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
         title: Text(supplement.name),
         trailing: Icon(Icons.more_vert),
         onTap: () {
-          log(supplement.name);
           Navigator.push(context,
             MaterialPageRoute(
               builder: (context) =>

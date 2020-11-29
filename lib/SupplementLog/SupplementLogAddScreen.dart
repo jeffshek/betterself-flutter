@@ -50,8 +50,6 @@ class _SupplementLogAddScreenState extends State<SupplementLogAddScreen> {
                     NarrowButton(
                       textContent: "Log ${widget.supplement.name}",
                       onPressed: () async {
-                        log("Adding Supplement Pressed");
-
                         _fbKey.currentState.saveAndValidate();
 
                         final currentStateValues = _fbKey.currentState.value;
