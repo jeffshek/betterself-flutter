@@ -95,7 +95,6 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
         leading: Text(localTimeDateFormat),
         title: Text(label),
         subtitle: Text(supplementLog.notes),
-        trailing: Icon(Icons.more_vert),
         onTap: () {
           _onSupplementLogTap(supplementLog);
         },
@@ -104,8 +103,6 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
   }
 
   Widget _renderSupplementDateIndex(DateTime index) {
-    // var localTimeDateFormat = DateFormat("yyyy-MM-dd hh:mm a").format(index);
-    // var localTimeDateFormat = DateFormat("yyyy-MM-dd").format(index);
     var localTimeDateFormat = DateFormat(DateTimeFormatConstants.WEEKDAY_MONTH_DAY_YEAR).format(index);
 
     // all of the supplements that occurred on this date

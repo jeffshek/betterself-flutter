@@ -2,7 +2,7 @@ class TitleConstants {
  static const LOGIN = "Login";
 
  static const SUPPLEMENTS = "Supplements";
- static const SUPPLEMENT_LOGS = "Supplement History";
+ static const SUPPLEMENT_LOGS = "Supplement Logs";
  static const ADD_NEW_SUPPLEMENT = "Add New Supplement";
  static const ADD_NEW_SUPPLEMENT_LOG = "Add Supplement Log";
 }

@@ -17,6 +17,8 @@ _launchBetterSelfURL() async {
   }
 }
 
+const DRAWER_PADDING_LEFT = 30.0;
+
 Widget getDrawer(context) {
   return Drawer(
     child: ListView(
@@ -39,16 +41,6 @@ Widget getDrawer(context) {
           ),
         ),
         ListTile(
-          leading: Icon(MaterialCommunityIcons.login),
-          title: Text(TitleConstants.LOGIN),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteConstants.LOGIN_FORM_ROUTE,
-            );
-          },
-        ),
-        ListTile(
           leading: Icon(MaterialCommunityIcons.pill),
           title: Text(TitleConstants.SUPPLEMENTS),
           onTap: () {
@@ -58,33 +50,53 @@ Widget getDrawer(context) {
             );
           },
         ),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.plus_box_outline),
-          title: Text(TitleConstants.ADD_NEW_SUPPLEMENT),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteConstants.SUPPLEMENT_ADD_ROUTE,
-            );
-          },
+        Padding(
+          padding: const EdgeInsets.only(left: DRAWER_PADDING_LEFT),
+          child: ListTile(
+            leading: Icon(MaterialCommunityIcons.plus_box_outline),
+            title: Text(TitleConstants.ADD_NEW_SUPPLEMENT),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteConstants.SUPPLEMENT_ADD_ROUTE,
+              );
+            },
+          ),
         ),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.calendar_check),
-          title: Text(TitleConstants.SUPPLEMENT_LOGS),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE,
-            );
-          },
+        Padding(
+          padding: const EdgeInsets.only(left: DRAWER_PADDING_LEFT),
+          child: ListTile(
+            leading: Icon(MaterialCommunityIcons.calendar_check),
+            title: Text(TitleConstants.SUPPLEMENT_LOGS),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE,
+              );
+            },
+          ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(left: DRAWER_PADDING_LEFT),
+          child: ListTile(
+            leading: Icon(MaterialCommunityIcons.calendar),
+            title: Text(TitleConstants.ADD_NEW_SUPPLEMENT_LOG),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE,
+              );
+            },
+          ),
+        ),
+        Divider(),
         ListTile(
-          leading: Icon(MaterialCommunityIcons.calendar),
-          title: Text(TitleConstants.ADD_NEW_SUPPLEMENT_LOG),
+          leading: Icon(MaterialCommunityIcons.login),
+          title: Text(TitleConstants.LOGIN),
           onTap: () {
             Navigator.pushNamed(
               context,
-              RouteConstants.SUPPLEMENT_LOG_CHOOSE_ADD_SUPPLEMENT_ROUTE,
+              RouteConstants.LOGIN_FORM_ROUTE,
             );
           },
         ),

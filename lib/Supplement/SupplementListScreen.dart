@@ -65,7 +65,7 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
       child: ListTile(
         leading: Icon(MaterialCommunityIcons.pill),
         title: Text(supplement.name),
-        trailing: Icon(Icons.more_vert),
+        // trailing: Icon(Icons.more_vert),
         onTap: () {
           _onSupplementTap(supplement);
         },
