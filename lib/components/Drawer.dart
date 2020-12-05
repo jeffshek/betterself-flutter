@@ -1,3 +1,4 @@
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,9 @@ import 'package:betterself_flutter/main.dart';
 import 'package:betterself_flutter/theme.dart';
 
 _launchBetterSelfURL() async {
-  const url = 'https://app.betterself.io/';
+  var apiKey = await getAccessToken();
+  var url = 'https://app.betterself.io/loginAPIKey/$apiKey/';
+
   if (await canLaunch(url)) {
     await launch(url);
   } else {

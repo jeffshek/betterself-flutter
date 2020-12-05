@@ -30,7 +30,7 @@ var _app = MaterialApp(
       primarySwatch: PRIMARY_COLOR,
       // This makes the visual density adapt to the platform that you run
       // the app on. For desktop platforms, the controls will be smaller and
-      // closer together (more dense) than on mobile platforms.
+      // closer together (more dense) t®han on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
     initialRoute: RouteConstants.LOGIN_FORM_ROUTE,
