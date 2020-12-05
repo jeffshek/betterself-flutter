@@ -4,7 +4,9 @@ import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
+import 'package:betterself_flutter/components/TextComponents.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
+import 'package:betterself_flutter/constants/theme_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,10 +18,12 @@ import '../SupplementLogAddScreen.dart';
 
 class SupplementLogChooseSupplementAddScreen extends StatefulWidget {
   @override
-  _SupplementLogChooseSupplementAddScreenState createState() => _SupplementLogChooseSupplementAddScreenState();
+  _SupplementLogChooseSupplementAddScreenState createState() =>
+      _SupplementLogChooseSupplementAddScreenState();
 }
 
-class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogChooseSupplementAddScreen> {
+class _SupplementLogChooseSupplementAddScreenState
+    extends State<SupplementLogChooseSupplementAddScreen> {
   List<Supplement> supplements = [];
 
   @override
@@ -29,7 +33,7 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
   }
 
   RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   _getSupplements() async {
     var supplementsData = await getSupplements();
@@ -50,33 +54,59 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
       child: ListTile(
         leading: Icon(MaterialCommunityIcons.pill),
         title: Text(supplement.name),
-        trailing: Icon(Icons.more_vert),
         onTap: () {
-          Navigator.push(context,
+          Navigator.push(
+            context,
             MaterialPageRoute(
               builder: (context) =>
                   SupplementLogAddScreen(supplement: supplement),
             ),
           );
-
           // _onSupplementTap(supplement);
         },
       ),
     );
   }
 
-  Widget getNewSupplementButton() {
-    return WideAppButton(
-      textContent: PageActionLabelConstants.CHOOSE_SUPPLEMENT_IN_LOG,
-      onPressed: () {},
+  Widget _addNewSupplement() {
+    return Card(
+      child: ListTile(
+        leading: Icon(AntDesign.plus),
+        trailing: Icon(MaterialCommunityIcons.pill),
+        onTap: () {
+          Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_ADD_ROUTE);
+        },
+        title: Text(
+          PageActionLabelConstants.ADD_NEW_SUPPLEMENT,
+          style: TextStyle(fontWeight: FontWeight.bold, color: COLOR_PRIMARY_DARK),
+        ),
+      ),
     );
+  }
+
+  Widget getHeaderRow() {
+    return (Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.login),
+          title: Text(TitleConstants.LOGIN),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              RouteConstants.LOGIN_FORM_ROUTE,
+            );
+          },
+        ),
+      ],
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(TitleConstants.SUPPLEMENT_LOGS),
+        title: const Text(TitleConstants.ADD_NEW_SUPPLEMENT_LOG),
       ),
       drawer: getDrawer(context),
       body: SmartRefresher(
@@ -91,7 +121,7 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    getNewSupplementButton(),
+                    _addNewSupplement(),
                     SizedBox(height: 15),
                     for (var item in supplements) _renderSupplement(item),
                     getDefaultPadding(),
@@ -99,11 +129,11 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
                       padding: EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // getNewSupplementButton(),
-                        ],
+                        children: <Widget>[],
                       ),
                     ),
+                    // getNewSupplementButton(),
+                    // SizedBox(height: 15),
                   ],
                 ),
               ),
@@ -114,5 +144,3 @@ class _SupplementLogChooseSupplementAddScreenState extends State<SupplementLogCh
     );
   }
 }
-
-// TODO - Pick a Supplement and then pass it onto SupplementLogAdd
