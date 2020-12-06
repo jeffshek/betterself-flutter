@@ -8,7 +8,6 @@ import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'dart:developer';
 
 class SupplementLogDetailScreen extends StatefulWidget {
   final SupplementLog supplementLog;
@@ -17,7 +16,8 @@ class SupplementLogDetailScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _SupplementLogDetailScreenState createState() => _SupplementLogDetailScreenState();
+  _SupplementLogDetailScreenState createState() =>
+      _SupplementLogDetailScreenState();
 }
 
 class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
@@ -33,7 +33,11 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
       body: SingleChildScrollView(
         child: FormBuilder(
           key: _fbKey,
-          initialValue: {"time": widget.supplementLog.time, "quantity": widget.supplementLog.quantity, "notes": widget.supplementLog.notes},
+          initialValue: {
+            "time": widget.supplementLog.time,
+            "quantity": widget.supplementLog.quantity,
+            "notes": widget.supplementLog.notes
+          },
           autovalidate: true,
           child: Container(
             child: Column(
@@ -44,29 +48,30 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: NarrowButton(
-                        textContent: "Edit ${widget.supplementLog.displayName}",
-                        onPressed: () async {
-                          _fbKey.currentState.saveAndValidate();
+                    NarrowButton(
+                      textContent: "Edit ${widget.supplementLog.displayName}",
+                      onPressed: () async {
+                        _fbKey.currentState.saveAndValidate();
 
-                          final currentStateValues = _fbKey.currentState.value;
-                          final instance = widget.supplementLog;
+                        final currentStateValues = _fbKey.currentState.value;
+                        final instance = widget.supplementLog;
 
-                          instance.time = currentStateValues['time'];
-                          instance.quantity = currentStateValues['quantity'];
-                          instance.notes = currentStateValues['notes'];
+                        instance.time = currentStateValues['time'];
+                        instance.quantity = currentStateValues['quantity'];
+                        instance.notes = currentStateValues['notes'];
 
-                          final updatedInstance = await updateSupplementLog(instance);
+                        final updatedInstance =
+                            await updateSupplementLog(instance);
 
-                          final message = "Your changes to ${updatedInstance.supplement.name} Log have been saved!";
-                          getSuccessSnackbarNotification(context, message);
+                        final message =
+                            "Your changes to ${updatedInstance.supplement.name} Log have been saved!";
+                        getSuccessSnackbarNotification(context, message);
 
-                          FocusManager.instance.primaryFocus.unfocus();
+                        FocusManager.instance.primaryFocus.unfocus();
 
-                          Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
-                        },
-                      ),
+                        Navigator.pushNamed(
+                            context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
+                      },
                     ),
                   ],
                 ),

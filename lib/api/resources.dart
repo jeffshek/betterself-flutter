@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
@@ -48,8 +49,10 @@ postCreateUser(String username, String password, String email) async {
 
 getSupplements() async {
   final token = await getAccessToken();
-  final supplementURL = getResourceEndpoint("supplements");
+  final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_RESOURCE);
   final headers = getAuthorizedHeaders(token);
+
+  log (supplementURL);
 
   final http.Response response = await http.get(
     supplementURL,
@@ -64,12 +67,12 @@ getSupplementLogs({int limit = 200}) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
 
-  final resourceURL = getResourceEndpoint("supplement_logs");
+  final resourceURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_LOGS_RESOURCE);
 
-  final resourceURLwithLimit = resourceURL + "?limit=$limit";
+  final resourceURLWithLimit = resourceURL + "?limit=$limit";
 
   final http.Response response = await http.get(
-    resourceURLwithLimit,
+    resourceURLWithLimit,
     headers: headers,
   );
 
@@ -147,6 +150,8 @@ createSupplement(Supplement supplement, [BuildContext context]) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
   final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_RESOURCE);
+
+  log(supplementURL);
 
   var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
   var jsonData = json.encode(data);

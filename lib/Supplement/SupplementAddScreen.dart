@@ -63,7 +63,8 @@ class _SupplementAddScreenState extends State<SupplementAddScreen> {
                           getSuccessSnackbarNotification(context, message);
 
                         } catch (err) {
-                          log("Error Occurred When Making Supplement $supplement.name");
+                          var errorMessage = err.toString();
+                          log("Error Occurred When Making Supplement $supplement.name. The error was $errorMessage");
                         }
 
                         FocusManager.instance.primaryFocus.unfocus();
