@@ -1,5 +1,6 @@
 class TitleConstants {
  static const LOGIN = "Login";
+ static const REGISTER = "Register";
 
  static const SUPPLEMENTS = "Supplements";
  static const SUPPLEMENT_LOGS = "Supplement Logs";

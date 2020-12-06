@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
@@ -22,9 +21,25 @@ postLogin(String username, String password) async {
   final http.Response response = await http.post(
     loginEndpoint,
     headers: unAuthenticatedAPIHeaders,
+    body: jsonEncode(
+      <String, String>{
+        'username': username,
+        'password': password,
+      },
+    ),
+  );
+  return response;
+}
+
+postCreateUser(String username, String password, String email) async {
+  final http.Response response = await http.post(
+    registerEndpoint,
+    headers: unAuthenticatedAPIHeaders,
     body: jsonEncode(<String, String>{
       'username': username,
-      'password': password,
+      'password1': password,
+      'password2': password,
+      'signed_up_from': 'betterself-mobile',
     }),
   );
 

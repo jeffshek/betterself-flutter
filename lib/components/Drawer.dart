@@ -16,7 +16,7 @@ _launchBetterSelfURL() async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
-    throw 'Could not launch $url';
+    throw 'Could not launch $url!';
   }
 }
 
@@ -94,6 +94,24 @@ Widget getDrawer(context) {
         ),
         Divider(),
         ListTile(
+          leading: Icon(MaterialCommunityIcons.access_point_network),
+          title: Text('Access Analytics (Web)'),
+          onTap: () {
+            _launchBetterSelfURL();
+          },
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(MaterialCommunityIcons.account_plus),
+          title: Text(TitleConstants.REGISTER),
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              RouteConstants.REGISTER_ROUTE,
+            );
+          },
+        ),
+        ListTile(
           leading: Icon(MaterialCommunityIcons.login),
           title: Text(TitleConstants.LOGIN),
           onTap: () {
@@ -101,13 +119,6 @@ Widget getDrawer(context) {
               context,
               RouteConstants.LOGIN_FORM_ROUTE,
             );
-          },
-        ),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.access_point_network),
-          title: Text('Access Analytics (Web)'),
-          onTap: () {
-            _launchBetterSelfURL();
           },
         ),
         ListTile(
