@@ -1,7 +1,11 @@
+import 'package:betterself_flutter/api/api.dart';
+import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
+import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -19,22 +23,22 @@ const FORM_MARGIN_PAD = 25.0;
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
-  Future<http.Response> createUser(String username, String password) async {
-    // final http.Response response = await postLogin(username, password);
-    //
-    // if (response.statusCode == 200) {
-    //   var loginResponse = loginResponseFromJson(response.body);
-    //   var token = loginResponse.key;
-    //   _saveAccessToken(token);
-    //
-    //   Navigator.pushNamed(
-    //     context,
-    //     RouteConstants.SUPPLEMENT_LIST_ROUTE,
-    //   );
-    // }
-    //
-    // return response;
-  }
+  // Future<http.Response> createUser(String username, String password1, String password2, String email) async {
+  //   final http.Response response = await postCreateUser(username, password1, password2, email);
+  //
+  //   if (response.statusCode == 200) {
+  //     var loginResponse = loginResponseFromJson(response.body);
+  //     var token = loginResponse.key;
+  //     saveAccessToken(token);
+  //
+  //     Navigator.pushNamed(
+  //       context,
+  //       RouteConstants.SUPPLEMENT_LIST_ROUTE,
+  //     );
+  //   }
+  //
+  //   return response;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +46,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SingleChildScrollView(
         child: FormBuilder(
           key: _fbKey,
+          // how it's stored on the backend, keep the same for easier compat
           initialValue: {
-            'username': "",
-            "password": "",
-            "verifyPassword": "",
+            'username': "dummy-account2",
+            "password1": "dummy-account",
+            "password2": "dummy-account",
             "email": "",
           },
           child: Column(
@@ -68,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           SizedBox(height: FORM_MARGIN_PAD),
                           FormBuilderTextField(
-                            attribute: "password",
+                            attribute: "password1",
                             decoration: InputDecoration(labelText: "Password"),
                             obscureText: true,
                             maxLines: 1,
@@ -80,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           SizedBox(height: FORM_MARGIN_PAD),
                           FormBuilderTextField(
-                            attribute: "password",
+                            attribute: "password2",
                             decoration: InputDecoration(labelText: "Confirm Password"),
                             obscureText: true,
                             maxLines: 1,
@@ -98,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             maxLines: 1,
                             validators: [
                               // FormBuilderValidators.required(),
-                              FormBuilderValidators.minLength(4),
+                              // FormBuilderValidators.minLength(4),
                               FormBuilderValidators.maxLength(32)
                             ],
                           ),
@@ -108,9 +113,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: () {
                               _fbKey.currentState.save();
                               if (_fbKey.currentState.validate()) {
-                                print(_fbKey.currentState.value);
-                                // login(_fbKey.currentState.value['username'],
-                                //     _fbKey.currentState.value['password']);
+                                createUser(
+                                    _fbKey.currentState.value['username'],
+                                    _fbKey.currentState.value['password1'],
+                                    _fbKey.currentState.value['password2'],
+                                    _fbKey.currentState.value['email'],
+                                    context
+                                );
                               }
                             },
                           ),

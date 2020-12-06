@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
@@ -23,7 +24,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
   @override
   void initState() {
-    _getAccessToken();
+    // _getAccessToken();
     super.initState();
   }
 
@@ -73,7 +74,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                             onPressed: () {
                               _fbKey.currentState.save();
                               if (_fbKey.currentState.validate()) {
-                                print(_fbKey.currentState.value);
+                                // print(_fbKey.currentState.value);
                                 login(_fbKey.currentState.value['username'],
                                     _fbKey.currentState.value['password']);
                               }
@@ -95,14 +96,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   Future<http.Response> login(String username, String password) async {
     final http.Response response = await postLogin(username, password);
 
-    log(response.statusCode.toString());
-    log(response.body);
-
-
     if (response.statusCode == 200) {
       var loginResponse = loginResponseFromJson(response.body);
       var token = loginResponse.key;
-      _saveAccessToken(token);
+      saveAccessToken(token);
 
       Navigator.pushNamed(
         context,
@@ -113,16 +110,16 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     return response;
   }
 
-  _saveAccessToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'accessToken';
-    prefs.setString(key, token);
-  }
+  // _saveAccessToken(String token) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final key = 'accessToken';
+  //   prefs.setString(key, token);
+  // }
 
-  _getAccessToken() async {
-    // this initializes the sharedPreferences, otherwise can't save token correctly?
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'accessToken';
-    var token = prefs.getString(key) ?? "";
-  }
+  // _getAccessToken() async {
+  //   // don't think this is necessary anymore
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final key = 'accessToken';
+  //   var token = prefs.getString(key) ?? "";
+  // }
 }

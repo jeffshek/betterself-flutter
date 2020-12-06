@@ -1,16 +1,7 @@
 import 'dart:developer';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
-
-const String serverAPI  = "https://open.senrigan.io/";
-const String apiBetterSelfV2 = "api/betterself/v2/";
-const String betterSelfServerAPI = "$serverAPI$apiBetterSelfV2";
-
-const Map<String, String> unAuthenticatedAPIHeaders = {
-'Content-Type': 'application/json; charset=UTF-8',
-};
-const String loginEndpoint =  "$serverAPI$LOGIN_RESOURCE_NAME";
-const String registerEndpoint = "$serverAPI$REGISTRATION_RESOURCE_NAME";
 
 Map<String, String> getAuthorizedHeaders (String token) {
   Map<String, String> authorizedHeaders = {
@@ -34,4 +25,10 @@ String getResourceEndpoint (String resource) {
   }
 
   return "$betterSelfServerAPI$resourceSerialized";
+}
+
+saveAccessToken(String token) async {
+  final prefs = await SharedPreferences.getInstance();
+  final key = 'accessToken';
+  prefs.setString(key, token);
 }

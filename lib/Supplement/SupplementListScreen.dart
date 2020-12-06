@@ -95,15 +95,6 @@ class _SupplementListScreenState extends State<SupplementListScreen> {
                     SizedBox(height: 15),
                     for (var item in supplements) _renderSupplement(item),
                     getDefaultPadding(),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          getNewSupplementButton(),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

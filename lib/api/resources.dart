@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/components/Notifications.dart';
+import 'package:betterself_flutter/constants/route_constants.dart';
+import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:betterself_flutter/models/Supplement.dart';
 import 'package:betterself_flutter/models/SupplementLog.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,16 +34,24 @@ postLogin(String username, String password) async {
   return response;
 }
 
-postCreateUser(String username, String password, String email) async {
+postCreateUser(String username, String password1, String password2, String email) async {
+  var postDetails = <String, String>{
+    'username': username,
+    // an issue where you're supporting betterself and writeup signup methods
+    'password': password1,
+    'password1': password1,
+    'password2': password2,
+    'signed_up_from': 'betterself-mobile',
+  };
+
+  if (email != "") {
+    postDetails['email'] = email;
+  }
+
   final http.Response response = await http.post(
     registerEndpoint,
     headers: unAuthenticatedAPIHeaders,
-    body: jsonEncode(<String, String>{
-      'username': username,
-      'password1': password,
-      'password2': password,
-      'signed_up_from': 'betterself-mobile',
-    }),
+    body: jsonEncode(postDetails),
   );
 
   return response;
@@ -146,12 +156,35 @@ updateSupplementLog(SupplementLog instance) async {
   return updatedInstance;
 }
 
+createUser(String username, String password1, String password2, String email, [BuildContext context]) async {
+  final http.Response response = await postCreateUser(username, password1, password2, email);
+
+  if ([200, 201].contains(response.statusCode)) {
+    var loginResponse = loginResponseFromJson(response.body);
+    var token = loginResponse.key;
+    saveAccessToken(token);
+
+    final message = "$username has been created!";
+    getSuccessSnackbarNotification(context, message);
+
+    Navigator.pushNamed(
+      context,
+      RouteConstants.SUPPLEMENT_LIST_ROUTE,
+    );
+  }
+  else {
+    if (context != null) {
+      getErrorSnackbarNotification(response.body, context);
+    }
+  }
+
+  return response;
+}
+
 createSupplement(Supplement supplement, [BuildContext context]) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
   final supplementURL = getResourceEndpoint(BACKEND_SUPPLEMENTS_RESOURCE);
-
-  log(supplementURL);
 
   var data = {"name": supplement.name.trim(), "notes": supplement.notes.trim()};
   var jsonData = json.encode(data);
