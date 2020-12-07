@@ -2,7 +2,6 @@ import 'package:betterself_flutter/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'HomePage/HomePage.dart';
 import 'Login/LoginFormScreen.dart';
 import 'Logout/LogoutScreen.dart';
 import 'Register/RegisterScreen.dart';
@@ -16,7 +15,6 @@ const AppName = "BetterSelf";
 const AppTitle = "BetterSelf";
 
 var routes = <String, WidgetBuilder>{
-  RouteConstants.HOME_ROUTE: (context) => HomePageScreen(),
   RouteConstants.LOGIN_FORM_ROUTE: (context) => LoginFormScreen(),
   RouteConstants.SUPPLEMENT_LIST_ROUTE: (context) => SupplementListScreen(),
   RouteConstants.SUPPLEMENT_ADD_ROUTE: (context) => SupplementAddScreen(),

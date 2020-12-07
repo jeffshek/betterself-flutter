@@ -23,6 +23,63 @@ class SupplementLogDetailScreen extends StatefulWidget {
 class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
 
+  void handleUpdateSupplementLog() async {
+    _fbKey.currentState.saveAndValidate();
+
+    final currentStateValues = _fbKey.currentState.value;
+    final instance = widget.supplementLog;
+
+    instance.time = currentStateValues['time'];
+    instance.quantity = currentStateValues['quantity'];
+    instance.notes = currentStateValues['notes'];
+
+    final updatedInstance = await updateSupplementLog(instance);
+
+    final message =
+        "Your changes to ${updatedInstance.supplement.name} Log have been saved!";
+    getSuccessSnackbarNotification(context, message);
+
+    FocusManager.instance.primaryFocus.unfocus();
+
+    Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
+  }
+
+  Future<void> _askedToDelete() async {
+    switch (await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Center(child: const Text('Please Confirm Log Delete')),
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, "REJECT");
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  SimpleDialogOption(
+                    onPressed: () {
+                      Navigator.pop(context, "CONFIRM");
+                    },
+                    child: const Text('Delete'),
+                  ),
+                ],
+              ),
+            ],
+          );
+        })) {
+      case "CONFIRM":
+        deleteSupplementLog(widget.supplementLog, context);
+        break;
+      case "REJECT":
+        // ...
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,31 +103,18 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
                 ...getSupplementLogFormFields(),
                 SizedBox(height: 20),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     NarrowButton(
-                      textContent: "Edit ${widget.supplementLog.displayName}",
+                      textContent: "Delete Log",
                       onPressed: () async {
-                        _fbKey.currentState.saveAndValidate();
-
-                        final currentStateValues = _fbKey.currentState.value;
-                        final instance = widget.supplementLog;
-
-                        instance.time = currentStateValues['time'];
-                        instance.quantity = currentStateValues['quantity'];
-                        instance.notes = currentStateValues['notes'];
-
-                        final updatedInstance =
-                            await updateSupplementLog(instance);
-
-                        final message =
-                            "Your changes to ${updatedInstance.supplement.name} Log have been saved!";
-                        getSuccessSnackbarNotification(context, message);
-
-                        FocusManager.instance.primaryFocus.unfocus();
-
-                        Navigator.pushNamed(
-                            context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
+                        _askedToDelete();
+                      },
+                    ),
+                    NarrowButton(
+                      textContent: "Update Log",
+                      onPressed: () async {
+                        handleUpdateSupplementLog();
                       },
                     ),
                   ],

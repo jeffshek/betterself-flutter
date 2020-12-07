@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
+import 'package:betterself_flutter/components/Notifications.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
@@ -12,7 +12,6 @@ import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginFormScreen extends StatefulWidget {
   @override
@@ -76,7 +75,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                               if (_fbKey.currentState.validate()) {
                                 // print(_fbKey.currentState.value);
                                 login(_fbKey.currentState.value['username'],
-                                    _fbKey.currentState.value['password']);
+                                    _fbKey.currentState.value['password'],
+                                context);
                               }
                             },
                           ),
@@ -93,7 +93,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     );
   }
 
-  Future<http.Response> login(String username, String password) async {
+  Future<http.Response> login(String username, String password, [BuildContext context]) async {
     final http.Response response = await postLogin(username, password);
 
     if (response.statusCode == 200) {
@@ -105,6 +105,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         context,
         RouteConstants.SUPPLEMENT_LIST_ROUTE,
       );
+    }
+    else {
+      if (context != null) {
+        getErrorSnackbarNotification(response.body, context);
+      }
     }
 
     return response;

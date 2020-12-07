@@ -1,6 +1,10 @@
 import 'package:betterself_flutter/constants/theme_constants.dart';
 import 'package:flutter/material.dart';
 
+
+const defaultColorGradient = const <Color>[COLOR_PRIMARY, COLOR_PRIMARY_DARK];
+// const defaultColorGradient = const <Color>[COLOR_PRIMARY, COLOR_PRIMARY];
+
 class WideAppButton extends StatefulWidget {
   var textContent;
   VoidCallback onPressed;
@@ -46,8 +50,9 @@ class WideAppButtonState extends State<WideAppButton> {
 class NarrowButton extends StatefulWidget {
   var textContent;
   VoidCallback onPressed;
+  var gradientColors;
 
-  NarrowButton({@required this.textContent, @required this.onPressed});
+  NarrowButton({@required this.textContent, @required this.onPressed, this.gradientColors=defaultColorGradient});
 
   @override
   State<StatefulWidget> createState() {
@@ -65,9 +70,9 @@ class NarrowButtonState extends State<NarrowButton> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
       padding: const EdgeInsets.all(0.0),
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: <Color>[COLOR_PRIMARY, COLOR_PRIMARY_DARK]),
+              colors: widget.gradientColors),
           borderRadius: BorderRadius.all(Radius.circular(80.0)),
         ),
         child: Padding(

@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:betterself_flutter/api/resources.dart';
-import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/Drawer.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
-import 'package:betterself_flutter/components/TextComponents.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/constants/theme_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';

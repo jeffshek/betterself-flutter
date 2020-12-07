@@ -1,16 +1,11 @@
-import 'package:betterself_flutter/api/api.dart';
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/components/AppButton.dart';
 import 'package:betterself_flutter/components/PaddingDefaults.dart';
 import 'package:betterself_flutter/components/RouteHeadingTextPadding.dart';
 import 'package:betterself_flutter/components/SafeAreaDefault.dart';
-import 'package:betterself_flutter/constants/route_constants.dart';
-import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
-import 'package:http/http.dart' as http;
 
 
 class RegisterScreen extends StatefulWidget {
@@ -22,23 +17,6 @@ const FORM_MARGIN_PAD = 25.0;
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
-
-  // Future<http.Response> createUser(String username, String password1, String password2, String email) async {
-  //   final http.Response response = await postCreateUser(username, password1, password2, email);
-  //
-  //   if (response.statusCode == 200) {
-  //     var loginResponse = loginResponseFromJson(response.body);
-  //     var token = loginResponse.key;
-  //     saveAccessToken(token);
-  //
-  //     Navigator.pushNamed(
-  //       context,
-  //       RouteConstants.SUPPLEMENT_LIST_ROUTE,
-  //     );
-  //   }
-  //
-  //   return response;
-  // }
 
   @override
   Widget build(BuildContext context) {

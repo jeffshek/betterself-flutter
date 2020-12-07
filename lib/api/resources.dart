@@ -126,7 +126,6 @@ updateSupplement(Supplement supplement) async {
 updateSupplementLog(SupplementLog instance) async {
   final token = await getAccessToken();
   final headers = getAuthorizedHeaders(token);
-
   final instanceEditURL = getSupplementLogInstanceURL(instance);
 
   var data = {
@@ -156,6 +155,27 @@ updateSupplementLog(SupplementLog instance) async {
   return updatedInstance;
 }
 
+deleteSupplementLog(SupplementLog instance, [BuildContext context]) async {
+  final token = await getAccessToken();
+  final headers = getAuthorizedHeaders(token);
+  final instanceEditURL = getSupplementLogInstanceURL(instance);
+
+  final http.Response response = await http.delete(
+    instanceEditURL,
+    headers: headers,
+  );
+
+  if ([200, 204].contains(response.statusCode)) {
+    if (context != null) {
+      const deleteMessage = "Log Has Been Deleted";
+      getSuccessSnackbarNotification(context, deleteMessage);
+    }
+  }
+
+  // final parsed = jsonDecode(response.body);
+  // return parsed;
+}
+
 createUser(String username, String password1, String password2, String email, [BuildContext context]) async {
   final http.Response response = await postCreateUser(username, password1, password2, email);
 
@@ -164,13 +184,13 @@ createUser(String username, String password1, String password2, String email, [B
     var token = loginResponse.key;
     saveAccessToken(token);
 
-    final message = "$username has been created!";
-    getSuccessSnackbarNotification(context, message);
-
     Navigator.pushNamed(
       context,
       RouteConstants.SUPPLEMENT_LIST_ROUTE,
     );
+
+    final message = "$username has been created!";
+    getSuccessSnackbarNotification(context, message);
   }
   else {
     if (context != null) {
