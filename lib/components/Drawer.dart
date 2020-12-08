@@ -1,13 +1,13 @@
+import 'package:betterself_flutter/api/constants.dart';
 import 'package:betterself_flutter/api/resources.dart';
 import 'package:betterself_flutter/constants/route_constants.dart';
 import 'package:betterself_flutter/constants/title_constants.dart';
+import 'package:betterself_flutter/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-import 'package:betterself_flutter/main.dart';
-import 'package:betterself_flutter/theme.dart';
+import '../main.dart';
 
 _launchBetterSelfURL() async {
   var apiKey = await getAccessToken();
@@ -21,6 +21,41 @@ _launchBetterSelfURL() async {
 }
 
 const DRAWER_PADDING_LEFT = 30.0;
+
+getDebugComponents(BuildContext context) {
+  var results = [];
+
+  if (!isProduction) {
+    results = [
+      Divider(),
+      ListTile(
+        leading: Icon(MaterialCommunityIcons.account_plus),
+        title: Text(TitleConstants.REGISTER),
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            RouteConstants.REGISTER_ROUTE,
+          );
+        },
+      ),
+      ListTile(
+        leading: Icon(MaterialCommunityIcons.login),
+        title: Text(TitleConstants.LOGIN),
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            RouteConstants.LOGIN_FORM_ROUTE,
+          );
+        },
+      ),
+    ];
+  }
+  else {
+    // if in prod, dont return random stuff that's noisy
+  }
+
+  return results;
+}
 
 Widget getDrawer(context) {
   return Drawer(
@@ -100,27 +135,7 @@ Widget getDrawer(context) {
             _launchBetterSelfURL();
           },
         ),
-        Divider(),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.account_plus),
-          title: Text(TitleConstants.REGISTER),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteConstants.REGISTER_ROUTE,
-            );
-          },
-        ),
-        ListTile(
-          leading: Icon(MaterialCommunityIcons.login),
-          title: Text(TitleConstants.LOGIN),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              RouteConstants.LOGIN_FORM_ROUTE,
-            );
-          },
-        ),
+
         ListTile(
           leading: Icon(MaterialCommunityIcons.login),
           title: Text('Logout'),
@@ -131,6 +146,7 @@ Widget getDrawer(context) {
             );
           },
         ),
+        ...getDebugComponents(context)
       ],
     ),
   );

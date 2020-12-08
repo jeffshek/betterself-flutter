@@ -21,7 +21,7 @@ class SupplementLogListScreen extends StatefulWidget {
 }
 
 class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
-  List<SupplementLog> _supplementLogs = [];
+  List<SupplementLog> _supplementLogs;
   Map<DateTime, List<SupplementLog>> _supplementLogsIndex = {};
 
   @override
@@ -54,14 +54,19 @@ class _SupplementLogListScreenState extends State<SupplementLogListScreen> {
   _getSupplementLogs() async {
     var supplementLogsData = await getSupplementLogs();
 
+    // only get a 100, otherwise, too slow to render ...
     if (supplementLogsData.length > 100) {
       supplementLogsData = supplementLogsData.sublist(0, 100);
     }
+
+    // clear all records, otherwise deleted records don't disappear
+    _supplementLogsIndex.clear();
 
     for (SupplementLog supplementLog in supplementLogsData) {
       var localTimestamp = supplementLog.time.toLocal();
       DateTime supplementDate = DateTime(
           localTimestamp.year, localTimestamp.month, localTimestamp.day);
+
       _supplementLogsIndex
           .putIfAbsent(supplementDate, () => [])
           .add(supplementLog);

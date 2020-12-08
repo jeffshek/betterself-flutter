@@ -12,6 +12,9 @@ import 'package:betterself_flutter/models/LoginResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class LoginFormScreen extends StatefulWidget {
   @override
@@ -23,7 +26,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
   @override
   void initState() {
-    // _getAccessToken();
+    // if already logged in, move them to another page instead
+    _getAccessToken();
     super.initState();
   }
 
@@ -68,17 +72,31 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                             ],
                           ),
                           SizedBox(height: 18),
-                          WideAppButton(
-                            textContent: "Login",
-                            onPressed: () {
-                              _fbKey.currentState.save();
-                              if (_fbKey.currentState.validate()) {
-                                // print(_fbKey.currentState.value);
-                                login(_fbKey.currentState.value['username'],
-                                    _fbKey.currentState.value['password'],
-                                context);
-                              }
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              NarrowButton(
+                                textContent: "Register",
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteConstants.REGISTER_ROUTE,
+                                  );
+                                },
+                              ),
+                              NarrowButton(
+                                textContent: "Login",
+                                onPressed: () {
+                                  _fbKey.currentState.save();
+                                  if (_fbKey.currentState.validate()) {
+                                    // print(_fbKey.currentState.value);
+                                    login(_fbKey.currentState.value['username'],
+                                        _fbKey.currentState.value['password'],
+                                    context);
+                                  }
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -105,6 +123,9 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
         context,
         RouteConstants.SUPPLEMENT_LIST_ROUTE,
       );
+
+      const message = "Login Successful";
+      getSuccessSnackbarNotification(context, message);
     }
     else {
       if (context != null) {
@@ -121,10 +142,22 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
   //   prefs.setString(key, token);
   // }
 
-  // _getAccessToken() async {
-  //   // don't think this is necessary anymore
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final key = 'accessToken';
-  //   var token = prefs.getString(key) ?? "";
-  // }
+  _getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'accessToken';
+    var token = prefs.getString(key) ?? "";
+
+    if (token != "") {
+      Navigator.pushNamed(
+        context,
+        RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE,
+      );
+
+      // var isProd = isProduction.toString();
+      // var message = "Detected Session: Is Production $isProd";
+      const message = "User Sessions Detected, Logging In!";
+
+      getSuccessSnackbarNotification(context, message);
+    }
+  }
 }

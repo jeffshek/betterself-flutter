@@ -73,9 +73,9 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
         })) {
       case "CONFIRM":
         deleteSupplementLog(widget.supplementLog, context);
+        Navigator.pushNamed(context, RouteConstants.SUPPLEMENT_LOG_LIST_ROUTE);
         break;
       case "REJECT":
-        // ...
         break;
     }
   }
@@ -91,7 +91,7 @@ class _SupplementLogDetailScreenState extends State<SupplementLogDetailScreen> {
         child: FormBuilder(
           key: _fbKey,
           initialValue: {
-            "time": widget.supplementLog.time,
+            "time": widget.supplementLog.time.toLocal(),
             "quantity": widget.supplementLog.quantity,
             "notes": widget.supplementLog.notes
           },

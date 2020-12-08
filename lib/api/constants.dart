@@ -1,3 +1,6 @@
+const AppName = "BetterSelf";
+const AppTitle = "BetterSelf";
+
 const String serverAPI  = "https://open.senrigan.io/";
 const String apiBetterSelfV2 = "api/betterself/v2/";
 

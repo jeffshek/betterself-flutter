@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:betterself_flutter/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,10 +11,8 @@ import 'Supplement/SupplementAddScreen.dart';
 import 'Supplement/SupplementListScreen.dart';
 import 'SupplementLog/Forms/SupplementLogChooseSupplementToAdd.dart';
 import 'SupplementLog/SupplementLogListScreen.dart';
+import 'api/constants.dart';
 import 'constants/route_constants.dart';
-
-const AppName = "BetterSelf";
-const AppTitle = "BetterSelf";
 
 var routes = <String, WidgetBuilder>{
   RouteConstants.LOGIN_FORM_ROUTE: (context) => LoginFormScreen(),
@@ -24,6 +24,8 @@ var routes = <String, WidgetBuilder>{
   RouteConstants.REGISTER_ROUTE: (context) => RegisterScreen(),
 };
 
+const bool isProduction = bool.fromEnvironment('dart.vm.product');
+
 var _app = MaterialApp(
     title: AppName,
     theme: ThemeData(
@@ -34,11 +36,10 @@ var _app = MaterialApp(
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
     initialRoute: RouteConstants.LOGIN_FORM_ROUTE,
-    // initialRoute: SupplementLogListRoute,
-    // initialRoute: SupplementListRoute,
     routes: routes);
 
 class BetterSelfApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) => _app);
