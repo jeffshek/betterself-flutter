@@ -14,8 +14,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../main.dart';
-
 class LoginFormScreen extends StatefulWidget {
   @override
   _LoginFormScreenState createState() => _LoginFormScreenState();
